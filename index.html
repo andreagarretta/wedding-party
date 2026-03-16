@@ -117,6 +117,41 @@
   .sleep-card p { font-size:.78rem; font-weight:300; color:var(--muted); line-height:1.6; }
   .sleep-badge { display:inline-block; margin-top:.75rem; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; padding:.25rem .7rem; border-radius:2px; background:rgba(201,168,76,.1); color:var(--gold); border:1px solid rgba(201,168,76,.25); }
 
+  /* NEARBY STAYS */
+  .nearby-title { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-style:italic; font-weight:300; margin-top:3rem; margin-bottom:.4rem; }
+  .nearby-sub { font-size:.8rem; font-weight:300; color:var(--muted); margin-bottom:1.5rem; line-height:1.6; }
+  .nearby-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:.75rem; }
+  .nearby-card { background:var(--warm-white); border:1px solid rgba(26,22,18,.08); border-radius:2px; padding:1.25rem 1.25rem 1rem; display:flex; flex-direction:column; gap:.35rem; transition:box-shadow .2s,transform .2s; }
+  .nearby-card:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(26,22,18,.08); }
+  .nearby-card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:.5rem; }
+  .nearby-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:400; }
+  .nearby-type { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; padding:.2rem .55rem; border-radius:2px; background:rgba(201,168,76,.1); color:var(--gold); border:1px solid rgba(201,168,76,.2); flex-shrink:0; }
+  .nearby-meta { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.1rem; }
+  .nearby-meta span { font-size:.72rem; font-weight:300; color:var(--muted); }
+  .nearby-link { margin-top:.6rem; display:inline-flex; align-items:center; gap:.35rem; font-size:.72rem; font-weight:400; color:var(--gold); text-decoration:none; letter-spacing:.05em; border-bottom:1px solid rgba(201,168,76,.3); padding-bottom:.1rem; transition:all .2s; width:fit-content; }
+  .nearby-link:hover { color:var(--ink); border-color:var(--ink); }
+  @media(max-width:640px) { .nearby-grid { grid-template-columns:1fr; } }
+
+
+  /* DRESS CODE */
+  .dresscode-section { background:var(--ink); padding:5rem 2rem; }
+  .dresscode-inner { max-width:900px; margin:0 auto; }
+  .dc-main-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; margin-top:2.5rem; }
+  .dc-words { display:flex; flex-direction:column; gap:1rem; }
+  .dc-word { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(2.5rem,6vw,4rem); font-weight:300; color:var(--cream); line-height:1; opacity:.15; transition:opacity .4s; }
+  .dc-word.active { opacity:1; color:var(--gold); }
+  .dc-vibes { display:flex; flex-direction:column; gap:.75rem; }
+  .dc-vibe { display:flex; align-items:flex-start; gap:.75rem; padding:.9rem 1rem; border:1px solid rgba(245,240,232,.07); border-radius:2px; background:rgba(245,240,232,.03); }
+  .dc-vibe-icon { font-size:1.2rem; flex-shrink:0; padding-top:.05rem; }
+  .dc-vibe-text {}
+  .dc-vibe-label { font-size:.7rem; font-weight:400; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.25rem; }
+  .dc-vibe-desc { font-size:.8rem; font-weight:300; color:rgba(245,240,232,.5); line-height:1.6; }
+  .dc-note { margin-top:2rem; padding:1.25rem 1.5rem; border-left:2px solid var(--gold); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:rgba(245,240,232,.6); line-height:1.6; }
+  @media(max-width:640px) {
+    .dc-main-grid { grid-template-columns:1fr; gap:2rem; }
+    .dc-word { font-size:2.5rem; }
+  }
+
   /* EXTRAS */
   .extras-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-top:2rem; }
   .extra-item { padding:1.25rem; background:var(--warm-white); border:1px solid rgba(26,22,18,.07); border-radius:2px; font-size:.8rem; font-weight:300; color:var(--muted); display:flex; flex-direction:column; gap:.4rem; }
@@ -220,6 +255,7 @@
       <li><a href="#schedule" data-i18n="navSchedule">Programme</a></li>
       <li><a href="#arrive" data-i18n="navArrive">Getting There</a></li>
       <li><a href="#sleep" data-i18n="navSleep">Where to Sleep</a></li>
+      <li><a href="#dresscode" data-i18n="navDresscode">Dress Code</a></li>
       <li><a href="#extras" data-i18n="navExtras">Extras</a></li>
       <li><a href="#fund" data-i18n="navFund">Honeymoon Fund</a></li>
     </ul>
@@ -241,6 +277,7 @@
   <a href="#schedule" onclick="closeMenu()" data-i18n="navSchedule">Programme</a>
   <a href="#arrive" onclick="closeMenu()" data-i18n="navArrive">Getting There</a>
   <a href="#sleep" onclick="closeMenu()" data-i18n="navSleep">Where to Sleep</a>
+  <a href="#dresscode" onclick="closeMenu()" data-i18n="navDresscode">Dress Code</a>
   <a href="#extras" onclick="closeMenu()" data-i18n="navExtras">Extras</a>
   <a href="#fund" onclick="closeMenu()" data-i18n="navFund">Honeymoon Fund</a>
   <div class="mobile-lang">
@@ -315,15 +352,10 @@
         <div class="dc-pill">🍴 <span data-i18n="d1food">Argentine buffet, Danish style</span></div>
       </div>
       <div style="height:1.5rem;"></div>
-      <div class="time-block"><div class="tb-time">14:00–16:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t1">Arrival at Osaby</div><div class="tb-desc" data-i18n="d1d1">Check-in. In each room, a personal note from the couple waits for you — along with an alfajor or a typical Argentine or Italian sweet. A first hug from the newlyweds.</div><div class="tb-tags"><span class="tag" data-i18n="tAccommodation">accommodation</span><span class="tag" data-i18n="tWelcome">welcome</span></div></div></div>
       <div class="time-block"><div class="tb-time">15:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t2">Welcome gathering</div><div class="tb-desc" data-i18n="d1d2">Vermouth, fresh juices and fruit. Everyone together for the first time — soft music to break the ice and start the warmth.</div><div class="tb-tags"><span class="tag">aperitivo</span><span class="tag">social</span></div></div></div>
-      <div class="time-block"><div class="tb-time">16:00–17:30</div><div class="tb-content"><div class="tb-title" data-i18n="d1t3">Outdoor activity</div><div class="tb-desc" data-i18n="d1d3">Walk around the property + photo hunt in "Argentine character" mode. Photos shared at dinner via the collaborative album.</div><div class="tb-tags"><span class="tag" data-i18n="tActivity">activity</span><span class="tag" data-i18n="tNature">nature</span><span class="tag" data-i18n="tPhotos">photos</span></div></div></div>
-      <div class="time-block"><div class="tb-time">17:30–18:30</div><div class="tb-content"><div class="tb-title" data-i18n="d1t4">Argentine-style Fika</div><div class="tb-desc" data-i18n="d1d4">Mate, chipá, medialunas, apple cake, pasta frola — outdoors. The 500-piece V&A jigsaw puzzle is officially launched: assembled together over the entire weekend.</div><div class="tb-tags"><span class="tag">fika</span><span class="tag">mate</span><span class="tag" data-i18n="tOutdoors">outdoors</span></div></div></div>
-      <div class="time-block"><div class="tb-time">18:30–21:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t5">Argentine buffet 🔥</div><div class="tb-desc" data-i18n="d1d5">Full parrilla (vegan option included), empanadas, Russian salad, homemade bread, chimichurri, grilled onions. Malbec and white wine.</div><div class="tb-tags"><span class="tag" data-i18n="tDinner">dinner</span><span class="tag">parrilla</span><span class="tag">malbec</span></div></div></div>
-      <div class="time-block"><div class="tb-time" data-i18n="tDessert">Dessert</div><div class="tb-content"><div class="tb-title" data-i18n="d1t6">Grilled peaches</div><div class="tb-desc" data-i18n="d1d6">With cream and dulce de leche, or homemade flan.</div></div></div>
-      <div class="time-block"><div class="tb-time">21:00–23:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t7">Bonfire with guitar</div><div class="tb-desc" data-i18n="d1d7">Songs from here and there, games to get to know each other, laughter and connection. The fire as an excuse to come closer.</div><div class="tb-tags"><span class="tag" data-i18n="tLiveMusic">live music</span><span class="tag">bonfire</span></div></div></div>
-      <div class="time-block"><div class="tb-time">22:50</div><div class="tb-content"><div class="tb-title" data-i18n="d1t8">Sweet potato paste &amp; cheese + digestifs</div><div class="tb-desc" data-i18n="d1d8">The classic Argentine combo. Baileys optional for those who want to linger.</div></div></div>
-      <div class="time-block"><div class="tb-time">23:00 →</div><div class="tb-content"><div class="tb-title" data-i18n="d1t9">Free time — board games, puzzle</div><div class="tb-desc" data-i18n="d1d9">Soft music. The goal is to be fresh for the big day. Stay up if you want — sleep if you should.</div><div class="tb-tags"><span class="tag" data-i18n="tFree">free time</span><span class="tag">V&amp;A puzzle</span></div></div></div>
+      <div class="time-block"><div class="tb-time">16:00–18:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t3">Outdoor activity</div><div class="tb-desc" data-i18n="d1d3">Walk around the property + photo hunt in 'Argentine character' mode. Photos shared at dinner via the collaborative album.</div><div class="tb-tags"><span class="tag" data-i18n="tActivity">activity</span><span class="tag" data-i18n="tNature">nature</span><span class="tag" data-i18n="tPhotos">photos</span></div></div></div>
+      <div class="time-block"><div class="tb-time">18:00–21:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t5">Argentine buffet 🔥</div><div class="tb-desc" data-i18n="d1d5">Full parrilla (vegan option included), empanadas, Russian salad, homemade bread, chimichurri, grilled onions. Malbec and white wine.</div><div class="tb-tags"><span class="tag" data-i18n="tDinner">dinner</span><span class="tag">parrilla</span><span class="tag">malbec</span></div></div></div>
+      <div class="time-block"><div class="tb-time">21:00 →</div><div class="tb-content"><div class="tb-title" data-i18n="d1t7">Bonfire with guitar 🔥</div><div class="tb-desc" data-i18n="d1d7">Songs from here and there, laughter and connection. The fire as an excuse to come closer.</div><div class="tb-tags"><span class="tag" data-i18n="tLiveMusic">live music</span><span class="tag">bonfire</span></div></div></div>
     </div>
   </div>
 
@@ -381,10 +413,10 @@
       <div class="time-block"><div class="tb-time">09:00–10:30</div><div class="tb-content"><div class="tb-title" data-i18n="d3t1">Breakfast / Brunch</div><div class="tb-desc" data-i18n="d3d1">Eggs, gravlax, dark bread, yogurt, jams, coffee. Total calm.</div><div class="tb-tags"><span class="tag">brunch</span><span class="tag">gravlax</span></div></div></div>
       <div class="time-block"><div class="tb-time">10:30–12:00</div><div class="tb-content"><div class="tb-title" data-i18n="d3t2">Botanical walk + flower crown workshop</div><div class="tb-desc" data-i18n="d3d2">We head out to gather wildflowers and make our own crowns together in the garden.</div><div class="tb-tags"><span class="tag" data-i18n="tNature">nature</span><span class="tag" data-i18n="tFlowers">flowers</span><span class="tag" data-i18n="tWorkshop">workshop</span></div></div></div>
       <div class="time-block"><div class="tb-time">12:00–13:30</div><div class="tb-content"><div class="tb-title" data-i18n="d3t3">Raising of the Midsommarstång 🌿</div><div class="tb-desc" data-i18n="d3d3">Swedish tradition at its finest. Dancing around the maypole — yes, including the frog dance. No one is exempt.</div><div class="tb-tags"><span class="tag" data-i18n="tTradition">tradition</span><span class="tag" data-i18n="tDancing">dancing</span><span class="tag">midsommar</span></div></div></div>
-      <div class="time-block"><div class="tb-time">13:30–15:30</div><div class="tb-content"><div class="tb-title" data-i18n="d3t4">Midsommar lunch</div><div class="tb-desc" data-i18n="d3d4">New potatoes, Swedish meatballs, rye bread, strawberries with cream, sandwich cake.</div><div class="tb-tags"><span class="tag" data-i18n="tLunch">lunch</span><span class="tag">swedish</span></div></div></div>
+
       <div class="time-block"><div class="tb-time">15:30–17:00</div><div class="tb-content"><div class="tb-title" data-i18n="d3t5">Traditional games</div><div class="tb-desc" data-i18n="d3d5">Kubb, sack race, jump rope, frisbee, football, volleyball, Swedish bocce. Whatever the group invents.</div><div class="tb-tags"><span class="tag">kubb</span><span class="tag" data-i18n="tGames">games</span><span class="tag" data-i18n="tOutdoors">outdoors</span></div></div></div>
       <div class="time-block"><div class="tb-time">17:00–18:30</div><div class="tb-content"><div class="tb-title" data-i18n="d3t6">Sauna + lake dip 🌊</div><div class="tb-desc" data-i18n="d3d6">The full Nordic experience. Sauna to lake and back — for the brave ones.</div><div class="tb-tags"><span class="tag">sauna</span><span class="tag" data-i18n="tLake">lake</span><span class="tag">nordic</span></div></div></div>
-      <div class="time-block"><div class="tb-time">19:00–20:00</div><div class="tb-content"><div class="tb-title" data-i18n="d3t7">Intimate closing 🥂</div><div class="tb-desc" data-i18n="d3d7">Final toast, words of gratitude from the couple, farewells. The most emotional moment of the weekend.</div><div class="tb-tags"><span class="tag" data-i18n="tFarewell">farewell</span><span class="tag" data-i18n="tToast">toast</span></div></div></div>
+
     </div>
   </div>
 </section>
@@ -432,12 +464,178 @@
     Options for every style — from a room at the venue to a tent or camper van. The important thing is that no one goes without a bed (unless they want to 🏕️).
   </p>
   <div class="sleep-options">
-    <div class="sleep-card"><div class="sleep-icon">🏰</div><h3>Osaby Säteri</h3><p data-i18n="sleep1">The venue itself. 26 beds available on the wedding grounds — waking up already there is priceless.</p><span class="sleep-badge" data-i18n="sleep1badge">26 beds</span></div>
     <div class="sleep-card"><div class="sleep-icon">🌿</div><h3>Stjärnviks Säteri</h3><p data-i18n="sleep2">In Tävelsås, a few minutes away. 5 double rooms + 2 rooms with 120 cm beds for the inner circle.</p><span class="sleep-badge" data-i18n="sleep2badge">5 doubles + 2 singles</span></div>
     <div class="sleep-card"><div class="sleep-icon">⛺</div><h3 data-i18n="sleep3title">Tent</h3><p data-i18n="sleep3">For the adventurous — sleeping under the Swedish June sky, where the light barely fades. Bring your tent and join in.</p><span class="sleep-badge" data-i18n="sleep3badge">nordic experience</span></div>
     <div class="sleep-card"><div class="sleep-icon">🚐</div><h3>Van / Camper</h3><p data-i18n="sleep4">Rent a van and park on the grounds. The most free-spirited option — with the best view at breakfast.</p><span class="sleep-badge" data-i18n="sleep4badge">wild experience</span></div>
   </div>
+  <!-- NEARBY AIRBNBS -->
+  <h3 class="nearby-title" data-i18n="nearbyTitle">Nearby Stays</h3>
+  <p class="nearby-sub" data-i18n="nearbySubtitle">We've handpicked a few Airbnbs and a hotel close to the venue — great options if the main beds fill up. Prices and availability vary, book early!</p>
+  <div class="nearby-grid">
+
+    <div class="nearby-card">
+      <div class="nearby-card-top">
+        <h4>Stubo Hotell</h4>
+        <span class="nearby-type">Hotel</span>
+      </div>
+      <div class="nearby-meta">
+        <span>📍 Local area</span>
+      </div>
+      <a class="nearby-link" href="#" target="_blank" data-i18n="nearbyBook">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Book hotel
+      </a>
+    </div>
+
+    <div class="nearby-card">
+      <div class="nearby-card-top">
+        <h4>Stjärnviksflotten</h4>
+        <span class="nearby-type">Airbnb</span>
+      </div>
+      <div class="nearby-meta">
+        <span>👥 2 guests</span>
+        <span>🛏 1 bedroom · 1 bed</span>
+        <span>🚿 1 bath</span>
+      </div>
+      <a class="nearby-link" href="#" target="_blank" data-i18n="nearbyBook">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Book on Airbnb
+      </a>
+    </div>
+
+    <div class="nearby-card">
+      <div class="nearby-card-top">
+        <h4>Airbnb Tävelsås</h4>
+        <span class="nearby-type">Airbnb</span>
+      </div>
+      <div class="nearby-meta">
+        <span>👥 5 guests</span>
+        <span>🛏 3 bedrooms · 5 beds</span>
+        <span>🚿 1 bath</span>
+      </div>
+      <a class="nearby-link" href="#" target="_blank" data-i18n="nearbyBook">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Book on Airbnb
+      </a>
+    </div>
+
+    <div class="nearby-card">
+      <div class="nearby-card-top">
+        <h4>Terraced House · Växjö</h4>
+        <span class="nearby-type">Airbnb</span>
+      </div>
+      <div class="nearby-meta">
+        <span>👥 4 guests</span>
+        <span>🛏 3 bedrooms · 3 beds</span>
+        <span>🚿 2 baths</span>
+      </div>
+      <a class="nearby-link" href="#" target="_blank" data-i18n="nearbyBook">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Book on Airbnb
+      </a>
+    </div>
+
+    <div class="nearby-card">
+      <div class="nearby-card-top">
+        <h4>House · Växjö</h4>
+        <span class="nearby-type">Airbnb</span>
+      </div>
+      <div class="nearby-meta">
+        <span>👥 6 guests</span>
+        <span>🛏 2 bedrooms · 6 beds</span>
+      </div>
+      <a class="nearby-link" href="#" target="_blank" data-i18n="nearbyBook">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Book on Airbnb
+      </a>
+    </div>
+
+    <div class="nearby-card">
+      <div class="nearby-card-top">
+        <h4>Damsö B&amp;B</h4>
+        <span class="nearby-type">Airbnb</span>
+      </div>
+      <div class="nearby-meta">
+        <span>🛏 3 bedrooms · 5 beds</span>
+      </div>
+      <a class="nearby-link" href="#" target="_blank" data-i18n="nearbyBook">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Book on Airbnb
+      </a>
+    </div>
+
+    <div class="nearby-card">
+      <div class="nearby-card-top">
+        <h4>House · Växjö</h4>
+        <span class="nearby-type">Airbnb</span>
+      </div>
+      <div class="nearby-meta">
+        <span>👥 6 guests</span>
+        <span>🛏 4 bedrooms · 4 beds</span>
+      </div>
+      <a class="nearby-link" href="#" target="_blank" data-i18n="nearbyBook">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Book on Airbnb
+      </a>
+    </div>
+
+  </div>
+
 </section>
+
+
+<!-- DRESS CODE -->
+<div class="dresscode-section" id="dresscode">
+  <div class="dresscode-inner">
+    <p class="section-label" style="color:var(--gold);" data-i18n="dcLabel">Dress Code</p>
+    <h2 class="section-title" style="color:var(--cream);margin-bottom:0;">
+      <span data-i18n="dcTitle1">Come as you are —</span><br>
+      <em style="font-family:'Cormorant Garamond',serif;font-style:italic;" data-i18n="dcTitle2">wild and beautiful</em>
+    </h2>
+
+    <div class="dc-main-grid">
+      <div class="dc-words" id="dcWords">
+        <div class="dc-word active">Bohemian</div>
+        <div class="dc-word">Gypsy</div>
+        <div class="dc-word">Free</div>
+        <div class="dc-word">Natural</div>
+      </div>
+
+      <div class="dc-vibes">
+        <div class="dc-vibe">
+          <div class="dc-vibe-icon">🌿</div>
+          <div class="dc-vibe-text">
+            <div class="dc-vibe-label" data-i18n="dcV1label">Colours</div>
+            <div class="dc-vibe-desc" data-i18n="dcV1">Earthy tones, warm whites, terracotta, sage green, dusty rose, burnt orange — think nature, not neon.</div>
+          </div>
+        </div>
+        <div class="dc-vibe">
+          <div class="dc-vibe-icon">🪡</div>
+          <div class="dc-vibe-text">
+            <div class="dc-vibe-label" data-i18n="dcV2label">Fabrics</div>
+            <div class="dc-vibe-desc" data-i18n="dcV2">Linen, cotton, lace, crochet, chiffon, silk — flowing and breathable. Layers welcome.</div>
+          </div>
+        </div>
+        <div class="dc-vibe">
+          <div class="dc-vibe-icon">💫</div>
+          <div class="dc-vibe-text">
+            <div class="dc-vibe-label" data-i18n="dcV3label">Accessories</div>
+            <div class="dc-vibe-desc" data-i18n="dcV3">Flower crowns, leather sandals, stacked jewellery, head scarves, boots — the more character the better.</div>
+          </div>
+        </div>
+        <div class="dc-vibe">
+          <div class="dc-vibe-icon">🚫</div>
+          <div class="dc-vibe-text">
+            <div class="dc-vibe-label" data-i18n="dcV4label">Leave at home</div>
+            <div class="dc-vibe-desc" data-i18n="dcV4">Formal suits and black-tie. This is a celebration in the wild — dress for the forest and the dance floor.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="dc-note" data-i18n="dcNote">"Wear something you could dance barefoot in, pick flowers in, and still feel like yourself at midnight."</p>
+  </div>
+</div>
 
 <!-- EXTRAS -->
 <section id="extras" style="background:var(--warm-white);max-width:100%;padding:5rem 2rem;">
@@ -474,10 +672,10 @@
           <div class="bank-card-header-label" data-i18n="bankTitle">Bank Transfer Details</div>
         </div>
         <div class="bank-rows">
-          <div class="bank-row"><div class="bank-label" data-i18n="bankName">Account name</div><div class="bank-value" onclick="copyText('Victoria & Andrea')">Victoria &amp; Andrea <span class="copy-hint" data-i18n="copy">copy</span></div></div>
-          <div class="bank-row"><div class="bank-label" data-i18n="bankBank">Bank</div><div class="bank-value">— add your bank —</div></div>
-          <div class="bank-row"><div class="bank-label">IBAN</div><div class="bank-value" onclick="copyText('XX00 0000 0000 0000 0000')">XX00 0000 0000 0000 <span class="copy-hint" data-i18n="copy">copy</span></div></div>
-          <div class="bank-row"><div class="bank-label">BIC / SWIFT</div><div class="bank-value" onclick="copyText('XXXXXXXX')">XXXXXXXX <span class="copy-hint" data-i18n="copy">copy</span></div></div>
+          <div class="bank-row"><div class="bank-label" data-i18n="bankName">Account name</div><div class="bank-value" onclick="copyText('Andrea Garretta')">Andrea Garretta <span class="copy-hint" data-i18n="copy">copy</span></div></div>
+          <div class="bank-row"><div class="bank-label" data-i18n="bankBank">Bank</div><div class="bank-value">Revolut Bank UAB</div></div>
+          <div class="bank-row"><div class="bank-label">IBAN</div><div class="bank-value" onclick="copyText('IT96 J036 6901 6008 5882 0548 942')">IT96 J036 6901 6008 5882 0548 942 <span class="copy-hint" data-i18n="copy">copy</span></div></div>
+          <div class="bank-row"><div class="bank-label">BIC / SWIFT</div><div class="bank-value" onclick="copyText('REVOITM2')">REVOITM2 <span class="copy-hint" data-i18n="copy">copy</span></div></div>
           <div class="bank-row"><div class="bank-label" data-i18n="bankRef">Reference</div><div class="bank-value" onclick="copyText('Honeymoon V&A')">Honeymoon V&amp;A <span class="copy-hint" data-i18n="copy">copy</span></div></div>
         </div>
       </div>
@@ -558,8 +756,8 @@ const T = {
     coordTitle:`Coordinating arrivals`, coordBody:`We'll set up a group to coordinate train times and share car rides from Växjö. If you're arriving by train, let us know and we'll sort the transfer. If you prefer freedom, rent a car and enjoy the Swedish countryside on your own terms.`,
     sleepLabel:`Accommodation`, sleepTitle1:`Where to`, sleepTitle2:`sleep`,
     sleepBody:`Options for every style — from a room at the venue to a tent or camper van. The important thing is that no one goes without a bed (unless they want to 🏕️).`,
-    sleep1:`The venue itself. 26 beds available on the wedding grounds — waking up already there is priceless.`,
-    sleep1badge:`26 beds`,
+    
+    
     sleep2:`In Tävelsås, a few minutes away. 5 double rooms + 2 rooms with 120 cm beds for the inner circle.`,
     sleep2badge:`5 doubles + 2 singles`,
     sleep3title:`Tent`, sleep3:`For the adventurous — sleeping under the Swedish June sky, where the light barely fades. Bring your tent and join in.`, sleep3badge:`nordic experience`,
@@ -579,6 +777,18 @@ const T = {
     bankTitle:`Bank Transfer Details`, bankName:`Account name`, bankBank:`Bank`, bankRef:`Reference`,
     copy:`copy`, fundNote:`Click any value to copy it to your clipboard. ✦ Thank you from the bottom of our hearts.`,
     footerLine:`June 18, 2026 · Osaby Säteri, Sweden`, footerSub:`With all the love in the world — and from Juan 🦋`,
+    navDresscode:`Dress Code`,
+    dcLabel:`Dress Code`,
+    dcTitle1:`Come as you are —`,
+    dcTitle2:`wild and beautiful`,
+    dcV1label:`Colours`, dcV1:`Earthy tones, warm whites, terracotta, sage green, dusty rose, burnt orange — think nature, not neon.`,
+    dcV2label:`Fabrics`, dcV2:`Linen, cotton, lace, crochet, chiffon, silk — flowing and breathable. Layers welcome.`,
+    dcV3label:`Accessories`, dcV3:`Flower crowns, leather sandals, stacked jewellery, head scarves, boots — the more character the better.`,
+    dcV4label:`Leave at home`, dcV4:`Formal suits and black-tie. This is a celebration in the wild — dress for the forest and the dance floor.`,
+    dcNote:`"Wear something you could dance barefoot in, pick flowers in, and still feel like yourself at midnight."`,
+    nearbyTitle:`Nearby Stays`,
+    nearbySubtitle:`We've handpicked a few Airbnbs and a hotel close to the venue — great options if the main beds fill up. Book early!`,
+    nearbyBook:`Book on Airbnb`,
     tAccommodation:`accommodation`, tWelcome:`welcome`, tActivity:`activity`, tNature:`nature`,
     tPhotos:`photos`, tOutdoors:`outdoors`, tDinner:`dinner`, tBreakfast:`breakfast`,
     tCeremony:`ceremony`, tWitnesses:`witnesses`, tLakeside:`lakeside`, tTattoo:`live tattoo`,
@@ -647,7 +857,7 @@ const T = {
     coordTitle:`Coordinare gli arrivi`, coordBody:`Creeremo un gruppo per coordinare gli orari dei treni e condividere i viaggi in auto da Växjö. Se arrivate in treno, fatemelo sapere e organizziamo il trasferimento. Se preferite libertà, noleggiate un'auto e godetevi la campagna svedese.`,
     sleepLabel:`Alloggio`, sleepTitle1:`Dove`, sleepTitle2:`dormire`,
     sleepBody:`Opzioni per ogni stile — da una camera in loco a una tenda o camper. L'importante è che nessuno rimanga senza letto (a meno che non lo voglia 🏕️).`,
-    sleep1:`Il luogo stesso. 26 posti letto disponibili nella tenuta — svegliarsi già lì non ha prezzo.`, sleep1badge:`26 posti letto`,
+     
     sleep2:`A Tävelsås, a pochi minuti. 5 camere doppie + 2 camere con letti da 120 cm per il cerchio più intimo.`, sleep2badge:`5 doppie + 2 singole`,
     sleep3title:`Tenda`, sleep3:`Per i più avventurosi — dormire sotto il cielo svedese di giugno, dove la luce quasi non tramonta. Porta la tua tenda.`, sleep3badge:`esperienza nordica`,
     sleep4:`Noleggia un van e parcheggia nella tenuta. L'opzione più libera — con la vista migliore a colazione.`, sleep4badge:`wild experience`,
@@ -666,6 +876,18 @@ const T = {
     bankTitle:`Dati per Bonifico Bancario`, bankName:`Intestatario`, bankBank:`Banca`, bankRef:`Causale`,
     copy:`copia`, fundNote:`Clicca su qualsiasi valore per copiarlo. ✦ Grazie di cuore.`,
     footerLine:`18 Giugno, 2026 · Osaby Säteri, Svezia`, footerSub:`Con tutto l'amore del mondo — e da Juan 🦋`,
+    navDresscode:`Dress Code`,
+    dcLabel:`Dress Code`,
+    dcTitle1:`Venite come siete —`,
+    dcTitle2:`selvaggi e bellissimi`,
+    dcV1label:`Colori`, dcV1:`Toni terrosi, bianchi caldi, terracotta, verde salvia, rosa antico, arancio bruciato — pensate alla natura, non al neon.`,
+    dcV2label:`Tessuti`, dcV2:`Lino, cotone, pizzo, crochet, chiffon, seta — fluidi e leggeri. Gli strati sono i benvenuti.`,
+    dcV3label:`Accessori`, dcV3:`Corone di fiori, sandali di cuoio, gioielli sovrapposti, foulard, stivali — più carattere, meglio è.`,
+    dcV4label:`Lasciate a casa`, dcV4:`Abiti da cerimonia e smoking. Questa è una festa nella natura — vestitevi per la foresta e la pista da ballo.`,
+    dcNote:`"Indossate qualcosa in cui potreste ballare scalzi, raccogliere fiori e sentirvi ancora voi stessi a mezzanotte."`,
+    nearbyTitle:`Alloggi nelle vicinanze`,
+    nearbySubtitle:`Abbiamo selezionato alcuni Airbnb e un hotel vicino alla sede — ottime opzioni se i posti principali si esauriscono. Prenota presto!`,
+    nearbyBook:`Prenota su Airbnb`,
     tAccommodation:`alloggio`, tWelcome:`benvenuto`, tActivity:`attività`, tNature:`natura`,
     tPhotos:`foto`, tOutdoors:`all'aperto`, tDinner:`cena`, tBreakfast:`colazione`,
     tCeremony:`cerimonia`, tWitnesses:`testimoni`, tLakeside:`sul lago`, tTattoo:`tatuaggio dal vivo`,
@@ -734,7 +956,7 @@ const T = {
     coordTitle:`Coordinar llegadas`, coordBody:`Vamos a armar un grupo para coordinar horarios de trenes y compartir autos desde Växjö. Si llegás en tren, avisanos y organizamos el transfer. Si preferís ir más libre, alquilá un auto y disfrutá del paisaje sueco.`,
     sleepLabel:`Alojamiento`, sleepTitle1:`Dónde`, sleepTitle2:`dormir`,
     sleepBody:`Opciones para todos los estilos — desde habitación en el lugar hasta carpa o van. Lo importante es que nadie se quede sin cama (a menos que quiera 🏕️).`,
-    sleep1:`El lugar mismo. 26 camas disponibles en el predio de la boda — despertarte ya estando ahí no tiene precio.`, sleep1badge:`26 camas`,
+     
     sleep2:`En Tävelsås, a pocos minutos. 5 habitaciones dobles + 2 habitaciones con camas de 120 cm para el círculo íntimo.`, sleep2badge:`5 dobles + 2 simples`,
     sleep3title:`Carpa`, sleep3:`Para los más aventureros — dormir bajo el cielo sueco de junio, donde la luz casi no se apaga. Traé tu carpa y súmate.`, sleep3badge:`experiencia nórdica`,
     sleep4:`Alquilá una van y estacioná en el predio. La opción más libre — con el mejor desayuno con vista al lago.`, sleep4badge:`experiencia salvaje`,
@@ -753,6 +975,18 @@ const T = {
     bankTitle:`Datos para Transferencia Bancaria`, bankName:`Titular de cuenta`, bankBank:`Banco`, bankRef:`Referencia`,
     copy:`copiar`, fundNote:`Hacé clic en cualquier valor para copiarlo. ✦ Gracias de todo corazón.`,
     footerLine:`18 de Junio, 2026 · Osaby Säteri, Suecia`, footerSub:`Con todo el amor del mundo — y de Juan 🦋`,
+    navDresscode:`Dress Code`,
+    dcLabel:`Dress Code`,
+    dcTitle1:`Vengan como son —`,
+    dcTitle2:`salvajes y hermosos`,
+    dcV1label:`Colores`, dcV1:`Tonos tierra, blancos cálidos, terracota, verde salvia, rosa pálido, naranja tostado — pensá en la naturaleza, no en el neón.`,
+    dcV2label:`Telas`, dcV2:`Lino, algodón, encaje, crochet, gasa, seda — fluidas y transpirables. Las capas son bienvenidas.`,
+    dcV3label:`Accesorios`, dcV3:`Coronas de flores, sandalias de cuero, joyas apiladas, pañuelos, botas — cuanto más personalidad, mejor.`,
+    dcV4label:`Dejá en casa`, dcV4:`Trajes formales y esmoquin. Esta es una celebración en la naturaleza — vestíte para el bosque y la pista de baile.`,
+    dcNote:`"Usá algo en lo que puedas bailar descalzo, juntar flores y seguir siendo vos mismo a medianoche."`,
+    nearbyTitle:`Alojamientos cercanos`,
+    nearbySubtitle:`Seleccionamos algunos Airbnbs y un hotel cerca del lugar — buenas opciones si se llenan las camas principales. ¡Reservá con anticipación!`,
+    nearbyBook:`Reservar en Airbnb`,
     tAccommodation:`alojamiento`, tWelcome:`bienvenida`, tActivity:`actividad`, tNature:`naturaleza`,
     tPhotos:`fotos`, tOutdoors:`aire libre`, tDinner:`cena`, tBreakfast:`desayuno`,
     tCeremony:`ceremonia`, tWitnesses:`testigos`, tLakeside:`frente al lago`, tTattoo:`tatuaje en vivo`,
@@ -809,6 +1043,18 @@ function copyText(text) {
     setTimeout(() => toast.classList.remove('show'), 2000);
   });
 }
+
+// ─── DRESS CODE WORD CYCLE ─────────────────────────────────────
+(function() {
+  const words = document.querySelectorAll('.dc-word');
+  if (!words.length) return;
+  let current = 0;
+  setInterval(() => {
+    words[current].classList.remove('active');
+    current = (current + 1) % words.length;
+    words[current].classList.add('active');
+  }, 1800);
+})();
 
 // ─── FADE IN ─────────────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
