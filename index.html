@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria & Andrea — Wedding 🦋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8; --warm-white: #faf8f4; --ink: #1a1612;
+    --muted: #7a6f63; --gold: #c9a84c; --gold-light: #e8d5a3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Jost',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
+
+  /* HERO */
+  .hero { min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; background:var(--ink); overflow:hidden; padding:2rem; }
+  .hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse at 20% 50%,rgba(201,168,76,.12) 0%,transparent 60%), radial-gradient(ellipse at 80% 50%,rgba(201,168,76,.08) 0%,transparent 60%), radial-gradient(ellipse at 50% 100%,rgba(201,168,76,.1) 0%,transparent 50%); }
+  .hero-flags { display:flex; gap:1rem; margin-bottom:2rem; font-size:2rem; opacity:0; animation:fadeUp 1s ease .3s forwards; }
+  .hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(4rem,12vw,9rem); font-weight:300; color:var(--cream); line-height:.9; letter-spacing:-.02em; opacity:0; animation:fadeUp 1s ease .5s forwards; }
+  .hero h1 em { font-style:italic; color:var(--gold); }
+  .hero-date { margin-top:2rem; font-size:.85rem; font-weight:300; letter-spacing:.3em; text-transform:uppercase; color:var(--gold-light); opacity:0; animation:fadeUp 1s ease .7s forwards; }
+  .hero-sub { margin-top:.75rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:rgba(245,240,232,.5); opacity:0; animation:fadeUp 1s ease .9s forwards; }
+  .hero-scroll { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.5rem; color:rgba(245,240,232,.3); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; opacity:0; animation:fadeUp 1s ease 1.4s forwards; }
+  .scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,var(--gold),transparent); animation:scrollPulse 2s ease infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.3)} }
+
+  /* LANG SWITCHER */
+  .lang-switcher { display:flex; gap:.25rem; align-items:center; }
+  .lang-btn { background:none; border:1px solid rgba(245,240,232,.15); color:rgba(245,240,232,.5); font-family:'Jost',sans-serif; font-size:.65rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; padding:.3rem .6rem; border-radius:3px; cursor:pointer; transition:all .2s; }
+  .lang-btn:hover { color:var(--gold); border-color:rgba(201,168,76,.4); }
+  .lang-btn.active { color:var(--gold); border-color:var(--gold); background:rgba(201,168,76,.1); }
+
+  /* NAV */
+  nav { position:sticky; top:0; z-index:100; background:rgba(26,22,18,.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(201,168,76,.2); padding:0 2rem; }
+  .nav-inner { max-width:1000px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:56px; gap:1rem; }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold); font-size:1.1rem; flex-shrink:0; }
+  .nav-links { display:flex; gap:.25rem; list-style:none; }
+  .nav-links a { display:block; padding:.4rem .75rem; color:rgba(245,240,232,.6); text-decoration:none; font-size:.72rem; font-weight:300; letter-spacing:.1em; text-transform:uppercase; border-radius:4px; transition:all .2s; }
+  .nav-links a:hover { color:var(--gold); background:rgba(201,168,76,.1); }
+  .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:.5rem; flex-shrink:0; }
+  .nav-hamburger span { display:block; width:22px; height:1.5px; background:rgba(245,240,232,.6); transition:all .3s; }
+
+  /* MOBILE DRAWER */
+  .mobile-menu { display:none; position:fixed; inset:0; z-index:200; background:rgba(26,22,18,.98); flex-direction:column; align-items:center; justify-content:center; gap:.75rem; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:2rem; font-weight:300; color:var(--cream); text-decoration:none; padding:.5rem 1rem; transition:color .2s; }
+  .mobile-menu a:hover { color:var(--gold); }
+  .mobile-menu-close { position:absolute; top:1.5rem; right:1.5rem; font-size:1.5rem; color:rgba(245,240,232,.4); cursor:pointer; background:none; border:none; padding:.5rem; }
+  .mobile-lang { display:flex; gap:.5rem; margin-top:1rem; }
+  .mobile-lang .lang-btn { font-size:.75rem; padding:.4rem .9rem; }
+
+  /* SECTIONS */
+  section { max-width:900px; margin:0 auto; padding:5rem 2rem; }
+  .section-label { font-size:.7rem; font-weight:400; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:300; line-height:1.05; margin-bottom:2rem; }
+  .divider { width:60px; height:1px; background:var(--gold); margin:2.5rem 0; opacity:.5; }
+
+  /* DAYS GRID */
+  .days-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(201,168,76,.2); margin-top:3rem; border:1px solid rgba(201,168,76,.2); }
+  .day-card { background:var(--ink); padding:2rem 1.5rem; cursor:pointer; transition:background .3s; position:relative; overflow:hidden; }
+  .day-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; transition:opacity .3s; opacity:.6; }
+  .day-card.arg::before { background:linear-gradient(90deg,#74ACDF,#F6B40E,#74ACDF); }
+  .day-card.ita::before { background:linear-gradient(90deg,#009246,#fff,#CE2B37); }
+  .day-card.swe::before { background:linear-gradient(90deg,#006AA7,#FECC02); }
+  .day-card:hover { background:rgba(201,168,76,.07); }
+  .day-card:hover::before { opacity:1; }
+  .day-emoji { font-size:2rem; margin-bottom:1rem; }
+  .day-num { font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:.4rem; }
+  .day-title { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-style:italic; margin-bottom:.5rem; }
+  .day-date { font-size:.75rem; font-weight:300; color:rgba(245,240,232,.45); letter-spacing:.1em; }
+  .day-desc { margin-top:1rem; font-size:.8rem; font-weight:300; color:rgba(245,240,232,.55); line-height:1.6; }
+
+  /* SCHEDULE ACCORDION */
+  .schedule-section { background:var(--warm-white); border-radius:2px; margin-bottom:1.5rem; border:1px solid rgba(26,22,18,.08); overflow:hidden; }
+  .schedule-header { padding:1.75rem 2rem; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:1rem; user-select:none; transition:background .2s; }
+  .schedule-header:hover { background:rgba(201,168,76,.05); }
+  .schedule-header-left { display:flex; align-items:center; gap:1.25rem; }
+  .schedule-flag { font-size:1.5rem; }
+  .schedule-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-style:italic; }
+  .schedule-subtitle { font-size:.75rem; font-weight:300; color:var(--muted); letter-spacing:.1em; margin-top:.2rem; }
+  .schedule-chevron { color:var(--gold); font-size:1rem; transition:transform .3s; }
+  .schedule-section.open .schedule-chevron { transform:rotate(180deg); }
+  .schedule-body { display:none; padding:0 2rem 2rem; }
+  .schedule-section.open .schedule-body { display:block; }
+  .time-block { display:grid; grid-template-columns:90px 1fr; gap:1rem; padding:.9rem 0; border-bottom:1px solid rgba(26,22,18,.06); align-items:start; }
+  .time-block:last-child { border-bottom:none; }
+  .tb-time { font-size:.72rem; font-weight:400; color:var(--gold); letter-spacing:.05em; padding-top:.15rem; }
+  .tb-title { font-size:.9rem; font-weight:400; margin-bottom:.2rem; }
+  .tb-desc { font-size:.8rem; font-weight:300; color:var(--muted); line-height:1.55; }
+  .tb-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.5rem; }
+  .tag { font-size:.65rem; font-weight:400; letter-spacing:.1em; text-transform:uppercase; padding:.2rem .6rem; border-radius:2px; background:rgba(201,168,76,.12); color:var(--gold); border:1px solid rgba(201,168,76,.25); }
+  .dresscode-row { display:flex; gap:1rem; margin-top:2rem; flex-wrap:wrap; }
+  .dc-pill { display:flex; align-items:center; gap:.5rem; padding:.6rem 1rem; border:1px solid rgba(26,22,18,.12); border-radius:40px; font-size:.78rem; font-weight:300; background:var(--warm-white); color:var(--muted); }
+  .dc-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+  /* ARRIVE */
+  .arrive-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2.5rem; }
+  .info-card { background:var(--warm-white); border:1px solid rgba(26,22,18,.08); padding:2rem; border-radius:2px; position:relative; }
+  .info-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); opacity:.4; }
+  .info-card-icon { font-size:1.5rem; margin-bottom:1rem; }
+  .info-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.3rem; margin-bottom:.75rem; }
+  .info-card p,.info-card li { font-size:.82rem; font-weight:300; color:var(--muted); line-height:1.7; }
+  .step-list { list-style:none; padding:0; }
+  .step-list li { display:flex; gap:.75rem; align-items:flex-start; padding:.5rem 0; font-size:.82rem; font-weight:300; color:var(--muted); line-height:1.6; border-bottom:1px solid rgba(26,22,18,.05); }
+  .step-list li:last-child { border-bottom:none; }
+  .step-num { font-size:.65rem; font-weight:500; color:var(--gold); background:rgba(201,168,76,.1); border:1px solid rgba(201,168,76,.25); border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:.1rem; }
+
+  /* SLEEP */
+  .sleep-options { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-top:2.5rem; }
+  .sleep-card { background:var(--warm-white); border:1px solid rgba(26,22,18,.08); padding:1.75rem 1.5rem; border-radius:2px; text-align:center; transition:transform .2s,box-shadow .2s; }
+  .sleep-card:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(26,22,18,.08); }
+  .sleep-icon { font-size:2rem; margin-bottom:.75rem; }
+  .sleep-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; margin-bottom:.5rem; }
+  .sleep-card p { font-size:.78rem; font-weight:300; color:var(--muted); line-height:1.6; }
+  .sleep-badge { display:inline-block; margin-top:.75rem; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; padding:.25rem .7rem; border-radius:2px; background:rgba(201,168,76,.1); color:var(--gold); border:1px solid rgba(201,168,76,.25); }
+
+  /* EXTRAS */
+  .extras-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-top:2rem; }
+  .extra-item { padding:1.25rem; background:var(--warm-white); border:1px solid rgba(26,22,18,.07); border-radius:2px; font-size:.8rem; font-weight:300; color:var(--muted); display:flex; flex-direction:column; gap:.4rem; }
+  .extra-item span:first-child { font-size:1.2rem; }
+  .extra-item strong { font-weight:400; color:var(--ink); font-size:.82rem; }
+
+  /* FUND */
+  .fund-section { background:var(--ink); padding:6rem 2rem; }
+  .fund-inner { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+  .fund-quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.3rem,2.5vw,1.9rem); font-weight:300; color:var(--cream); line-height:1.5; margin-top:1.5rem; border-left:2px solid var(--gold); padding-left:1.5rem; opacity:.85; }
+  .fund-sub { margin-top:1.5rem; font-size:.82rem; font-weight:300; color:rgba(245,240,232,.4); line-height:1.8; padding-left:1.5rem; }
+  .bank-card { background:rgba(245,240,232,.04); border:1px solid rgba(201,168,76,.2); border-radius:2px; overflow:hidden; }
+  .bank-card-header { padding:1.25rem 1.5rem; border-bottom:1px solid rgba(201,168,76,.15); display:flex; align-items:center; gap:.75rem; }
+  .bank-card-header-icon { font-size:1.1rem; }
+  .bank-card-header-label { font-size:.65rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); font-weight:400; }
+  .bank-rows { padding:.5rem 0; }
+  .bank-row { display:flex; justify-content:space-between; align-items:center; padding:.85rem 1.5rem; border-bottom:1px solid rgba(245,240,232,.04); gap:1rem; }
+  .bank-row:last-child { border-bottom:none; }
+  .bank-label { font-size:.7rem; font-weight:300; letter-spacing:.1em; text-transform:uppercase; color:rgba(245,240,232,.35); }
+  .bank-value { font-size:.85rem; font-weight:400; color:var(--cream); letter-spacing:.03em; text-align:right; cursor:pointer; transition:color .2s; }
+  .bank-value:hover { color:var(--gold); }
+  .bank-value .copy-hint { font-size:.6rem; color:rgba(245,240,232,.2); margin-left:.4rem; font-weight:300; }
+  .copy-toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(10px); background:var(--gold); color:var(--ink); font-size:.75rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; padding:.6rem 1.25rem; border-radius:40px; opacity:0; transition:opacity .3s,transform .3s; pointer-events:none; z-index:999; }
+  .copy-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .fund-note { margin-top:1.25rem; font-size:.72rem; font-weight:300; color:rgba(245,240,232,.25); line-height:1.7; text-align:center; font-style:italic; }
+
+  /* FOOTER */
+  footer { background:var(--ink); color:rgba(245,240,232,.3); text-align:center; padding:3rem 2rem; font-size:.75rem; font-weight:300; letter-spacing:.1em; border-top:1px solid rgba(201,168,76,.1); }
+  footer strong { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.8rem; color:var(--gold); font-weight:300; margin-bottom:.5rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .fade-in { opacity:0; transform:translateY(16px); transition:opacity .7s ease,transform .7s ease; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  /* RESPONSIVE — tablet */
+  @media(max-width:860px) {
+    .fund-inner { grid-template-columns:1fr; gap:2.5rem; }
+    .arrive-grid { grid-template-columns:1fr; }
+    .nav-links a { font-size:.65rem; padding:.4rem .5rem; }
+  }
+
+  /* RESPONSIVE — mobile */
+  @media(max-width:640px) {
+    .nav-links { display:none; }
+    .nav-hamburger { display:flex; }
+    .hero { padding:3rem 1.5rem; }
+    .hero-date { font-size:.7rem; letter-spacing:.15em; }
+    .hero-sub { font-size:1rem; }
+    section { padding:3.5rem 1.25rem; }
+    .days-grid { grid-template-columns:1fr; gap:0; }
+    .day-card { padding:1.5rem 1.25rem; }
+    .schedule-header { padding:1.25rem 1rem; }
+    .schedule-body { padding:0 1rem 1.5rem; }
+    .schedule-title { font-size:1.4rem; }
+    .schedule-subtitle { font-size:.7rem; }
+    .time-block { grid-template-columns:70px 1fr; gap:.75rem; padding:.75rem 0; }
+    .dresscode-row { flex-direction:column; gap:.5rem; }
+    .dc-pill { font-size:.73rem; }
+    .info-card { padding:1.5rem 1.25rem; }
+    .sleep-options { grid-template-columns:1fr 1fr; gap:.75rem; }
+    .sleep-card { padding:1.25rem 1rem; }
+    .extras-grid { grid-template-columns:1fr 1fr; gap:.75rem; }
+    .extra-item { padding:1rem; }
+    .fund-section { padding:3.5rem 1.25rem; }
+    .fund-quote { font-size:1.15rem; padding-left:1rem; }
+    .fund-sub { padding-left:1rem; }
+    .bank-row { flex-wrap:wrap; gap:.25rem; padding:.75rem 1rem; }
+    .bank-label { width:100%; }
+    .section-title { font-size:clamp(2rem,8vw,3rem); }
+    footer { padding:2.5rem 1.25rem; }
+  }
+  @media(max-width:380px) {
+    .sleep-options,.extras-grid { grid-template-columns:1fr; }
+    .time-block { grid-template-columns:1fr; }
+    .tb-time { font-size:.65rem; margin-bottom:.15rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-flags">🦋 🦋 🦋</div>
+  <h1>Victoria<br><em>&amp; Andrea</em></h1>
+  <p class="hero-date" data-i18n="heroDate">June 17 · 18 · 19, 2026 · Osaby Säteri, Sweden</p>
+  <p class="hero-sub" data-i18n="heroSub">Three days, three worlds — Argentina · Italy · Sweden</p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span data-i18n="scroll">scroll</span>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">V &amp; A</span>
+    <ul class="nav-links">
+      <li><a href="#journey" data-i18n="navJourney">The Journey</a></li>
+      <li><a href="#schedule" data-i18n="navSchedule">Programme</a></li>
+      <li><a href="#arrive" data-i18n="navArrive">Getting There</a></li>
+      <li><a href="#sleep" data-i18n="navSleep">Where to Sleep</a></li>
+      <li><a href="#extras" data-i18n="navExtras">Extras</a></li>
+      <li><a href="#fund" data-i18n="navFund">Honeymoon Fund</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <div class="nav-hamburger" onclick="openMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMenu()">✕</button>
+  <a href="#journey" onclick="closeMenu()" data-i18n="navJourney">The Journey</a>
+  <a href="#schedule" onclick="closeMenu()" data-i18n="navSchedule">Programme</a>
+  <a href="#arrive" onclick="closeMenu()" data-i18n="navArrive">Getting There</a>
+  <a href="#sleep" onclick="closeMenu()" data-i18n="navSleep">Where to Sleep</a>
+  <a href="#extras" onclick="closeMenu()" data-i18n="navExtras">Extras</a>
+  <a href="#fund" onclick="closeMenu()" data-i18n="navFund">Honeymoon Fund</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section id="journey">
+  <p class="section-label" data-i18n="introLabel">The Wedding</p>
+  <h2 class="section-title fade-in"><span data-i18n="introTitle1">A weekend</span><br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;" data-i18n="introTitle2">to remember forever</em></h2>
+  <div class="divider"></div>
+  <p style="font-size:.9rem;font-weight:300;color:var(--muted);line-height:1.85;max-width:600px;" class="fade-in" data-i18n="introBody">
+    Victoria and Andrea — lovers of the art of gathering, travel, nature, music, sport and great food — are getting married surrounded by the people they love most, in a magical corner of Sweden. Three days, three identities, one love story.
+  </p>
+
+  <div style="background:var(--ink);color:var(--cream);padding:4rem 2rem;margin-top:3rem;border-radius:2px;">
+    <div style="max-width:900px;margin:0 auto;">
+      <p class="section-label" style="color:var(--gold);" data-i18n="programmeLabel">The Programme</p>
+      <h2 class="section-title fade-in" style="color:var(--cream);"><span data-i18n="programmeTitle1">Three days,</span><br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;" data-i18n="programmeTitle2">three worlds</em></h2>
+      <div class="days-grid">
+        <div class="day-card arg" onclick="openDay('day1')">
+          <div class="day-emoji">🇦🇷</div>
+          <div class="day-num" data-i18n="day1num">Day 1 · June 17</div>
+          <div class="day-title">Argentina</div>
+          <div class="day-date" data-i18n="day1date">Pre-party · Close friends</div>
+          <div class="day-desc" data-i18n="day1desc">A warm Argentine welcome. Parrilla, mate, bonfire and guitar under the Swedish stars.</div>
+        </div>
+        <div class="day-card ita" onclick="openDay('day2')">
+          <div class="day-emoji">🇮🇹</div>
+          <div class="day-num" data-i18n="day2num">Day 2 · June 18</div>
+          <div class="day-title">Italia</div>
+          <div class="day-date" data-i18n="day2date">The Wedding · Main Celebration</div>
+          <div class="day-desc" data-i18n="day2desc">Mediterranean elegance. Outdoor ceremony by the lake, prosecco, pasta, tiramisù and dancing till dawn.</div>
+        </div>
+        <div class="day-card swe" onclick="openDay('day3')">
+          <div class="day-emoji">🇸🇪</div>
+          <div class="day-num" data-i18n="day3num">Day 3 · June 19</div>
+          <div class="day-title">Midsommar</div>
+          <div class="day-date" data-i18n="day3date">After-party · Intimate farewell</div>
+          <div class="day-desc" data-i18n="day3desc">Flower crowns, midsommarstång, sauna by the lake and a farewell full of gratitude.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <p class="section-label" data-i18n="schedLabel">Detailed Programme</p>
+  <h2 class="section-title fade-in"><span data-i18n="schedTitle1">Every moment,</span><br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;" data-i18n="schedTitle2">planned with love</em></h2>
+  <div class="divider"></div>
+
+  <!-- DAY 1 -->
+  <div class="schedule-section" id="day1">
+    <div class="schedule-header" onclick="toggleDay('day1')">
+      <div class="schedule-header-left">
+        <div class="schedule-flag">🇦🇷</div>
+        <div>
+          <div class="schedule-title">Argentina</div>
+          <div class="schedule-subtitle" data-i18n="d1subtitle">Tuesday, June 17 · Welcome · Close Friends</div>
+        </div>
+      </div>
+      <div class="schedule-chevron">▼</div>
+    </div>
+    <div class="schedule-body">
+      <div class="dresscode-row">
+        <div class="dc-pill"><div class="dc-dot" style="background:#74ACDF"></div><span data-i18n="d1dc">Dress code: relaxed and comfortable — your best self</span></div>
+        <div class="dc-pill">🎶 Folklore · Tango · Rock · Cumbia</div>
+        <div class="dc-pill">🍴 <span data-i18n="d1food">Argentine buffet, Danish style</span></div>
+      </div>
+      <div style="height:1.5rem;"></div>
+      <div class="time-block"><div class="tb-time">14:00–16:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t1">Arrival at Osaby</div><div class="tb-desc" data-i18n="d1d1">Check-in. In each room, a personal note from the couple waits for you — along with an alfajor or a typical Argentine or Italian sweet. A first hug from the newlyweds.</div><div class="tb-tags"><span class="tag" data-i18n="tAccommodation">accommodation</span><span class="tag" data-i18n="tWelcome">welcome</span></div></div></div>
+      <div class="time-block"><div class="tb-time">15:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t2">Welcome gathering</div><div class="tb-desc" data-i18n="d1d2">Vermouth, fresh juices and fruit. Everyone together for the first time — soft music to break the ice and start the warmth.</div><div class="tb-tags"><span class="tag">aperitivo</span><span class="tag">social</span></div></div></div>
+      <div class="time-block"><div class="tb-time">16:00–17:30</div><div class="tb-content"><div class="tb-title" data-i18n="d1t3">Outdoor activity</div><div class="tb-desc" data-i18n="d1d3">Walk around the property + photo hunt in "Argentine character" mode. Photos shared at dinner via the collaborative album.</div><div class="tb-tags"><span class="tag" data-i18n="tActivity">activity</span><span class="tag" data-i18n="tNature">nature</span><span class="tag" data-i18n="tPhotos">photos</span></div></div></div>
+      <div class="time-block"><div class="tb-time">17:30–18:30</div><div class="tb-content"><div class="tb-title" data-i18n="d1t4">Argentine-style Fika</div><div class="tb-desc" data-i18n="d1d4">Mate, chipá, medialunas, apple cake, pasta frola — outdoors. The 500-piece V&A jigsaw puzzle is officially launched: assembled together over the entire weekend.</div><div class="tb-tags"><span class="tag">fika</span><span class="tag">mate</span><span class="tag" data-i18n="tOutdoors">outdoors</span></div></div></div>
+      <div class="time-block"><div class="tb-time">18:30–21:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t5">Argentine buffet 🔥</div><div class="tb-desc" data-i18n="d1d5">Full parrilla (vegan option included), empanadas, Russian salad, homemade bread, chimichurri, grilled onions. Malbec and white wine.</div><div class="tb-tags"><span class="tag" data-i18n="tDinner">dinner</span><span class="tag">parrilla</span><span class="tag">malbec</span></div></div></div>
+      <div class="time-block"><div class="tb-time" data-i18n="tDessert">Dessert</div><div class="tb-content"><div class="tb-title" data-i18n="d1t6">Grilled peaches</div><div class="tb-desc" data-i18n="d1d6">With cream and dulce de leche, or homemade flan.</div></div></div>
+      <div class="time-block"><div class="tb-time">21:00–23:00</div><div class="tb-content"><div class="tb-title" data-i18n="d1t7">Bonfire with guitar</div><div class="tb-desc" data-i18n="d1d7">Songs from here and there, games to get to know each other, laughter and connection. The fire as an excuse to come closer.</div><div class="tb-tags"><span class="tag" data-i18n="tLiveMusic">live music</span><span class="tag">bonfire</span></div></div></div>
+      <div class="time-block"><div class="tb-time">22:50</div><div class="tb-content"><div class="tb-title" data-i18n="d1t8">Sweet potato paste &amp; cheese + digestifs</div><div class="tb-desc" data-i18n="d1d8">The classic Argentine combo. Baileys optional for those who want to linger.</div></div></div>
+      <div class="time-block"><div class="tb-time">23:00 →</div><div class="tb-content"><div class="tb-title" data-i18n="d1t9">Free time — board games, puzzle</div><div class="tb-desc" data-i18n="d1d9">Soft music. The goal is to be fresh for the big day. Stay up if you want — sleep if you should.</div><div class="tb-tags"><span class="tag" data-i18n="tFree">free time</span><span class="tag">V&amp;A puzzle</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="schedule-section" id="day2">
+    <div class="schedule-header" onclick="toggleDay('day2')">
+      <div class="schedule-header-left">
+        <div class="schedule-flag">🇮🇹</div>
+        <div>
+          <div class="schedule-title">Italia</div>
+          <div class="schedule-subtitle" data-i18n="d2subtitle">Wednesday, June 18 · The Wedding · Ceremony &amp; Celebration</div>
+        </div>
+      </div>
+      <div class="schedule-chevron">▼</div>
+    </div>
+    <div class="schedule-body">
+      <div class="dresscode-row">
+        <div class="dc-pill"><div class="dc-dot" style="background:#CE2B37"></div><span data-i18n="d2dc">Dress code: summer formal — linen, white, soft tones</span></div>
+        <div class="dc-pill">🎶 <span data-i18n="d2music">Italian playlist · Live band · DJ</span></div>
+        <div class="dc-pill">🍴 <span data-i18n="d2food">Italian buffet, Danish style</span></div>
+      </div>
+      <div style="height:1.5rem;"></div>
+      <div class="time-block"><div class="tb-time">08:30–10:30</div><div class="tb-content"><div class="tb-title" data-i18n="d2t1">Breakfast buffet</div><div class="tb-desc" data-i18n="d2d1">Focaccia, fruit, espresso, yogurt, granola, biscotti, Tuscan cookies, cheese, prosciutto — and any leftover medialunas from yesterday.</div><div class="tb-tags"><span class="tag" data-i18n="tBreakfast">breakfast</span><span class="tag">espresso</span></div></div></div>
+      <div class="time-block"><div class="tb-time">10:30–12:00</div><div class="tb-content"><div class="tb-title" data-i18n="d2t2">Free time</div><div class="tb-desc" data-i18n="d2d2">Optional yoga, getting ready. The moment of hair, suits, nerves and emotion.</div></div></div>
+      <div class="time-block"><div class="tb-time">12:00–13:00</div><div class="tb-content"><div class="tb-title" data-i18n="d2t3">Witnesses gathering + rehearsal</div><div class="tb-desc" data-i18n="d2d3">A symbolic rehearsal of the ceremony. Backstage photos.</div><div class="tb-tags"><span class="tag" data-i18n="tCeremony">ceremony</span><span class="tag" data-i18n="tWitnesses">witnesses</span></div></div></div>
+      <div class="time-block"><div class="tb-time">14:00–15:00</div><div class="tb-content"><div class="tb-title" data-i18n="d2t4">✨ Symbolic ceremony</div><div class="tb-desc" data-i18n="d2d4">Outdoors by the lake. The moment. Live tattoo artist as a permanent memory of this day — while guests begin with the aperitivos.</div><div class="tb-tags"><span class="tag" data-i18n="tCeremony">ceremony</span><span class="tag" data-i18n="tLakeside">lakeside</span><span class="tag" data-i18n="tTattoo">live tattoo</span></div></div></div>
+      <div class="time-block"><div class="tb-time">15:00–16:30</div><div class="tb-content"><div class="tb-title" data-i18n="d2t5">Prosecco toast</div><div class="tb-desc" data-i18n="d2d5">Mediterranean aperitivos: bruschette, cheeses, olives, prosciutto. Tapas &amp; finger food as prosecco flows.</div><div class="tb-tags"><span class="tag" data-i18n="tToast">toast</span><span class="tag">prosecco</span></div></div></div>
+      <div class="time-block"><div class="tb-time">18:30–21:30</div><div class="tb-content"><div class="tb-title" data-i18n="d2t6">Grand Italian dinner 🍝</div><div class="tb-desc" data-i18n="d2d6">Pizza, antipasti, hot pasta: lasagna and gnocchi. Salads. Desserts: tiramisù, panna cotta and gelato.</div><div class="tb-tags"><span class="tag" data-i18n="tDinner">dinner</span><span class="tag">pasta</span><span class="tag">tiramisù</span></div></div></div>
+      <div class="time-block"><div class="tb-time" data-i18n="duringDinner">During dinner</div><div class="tb-content"><div class="tb-title" data-i18n="d2t7">Speeches + Trivia</div><div class="tb-desc" data-i18n="d2d7">Guest speeches + trivia game "How well do you know them?" — questions about the couple to share laughs together.</div><div class="tb-tags"><span class="tag" data-i18n="tSpeeches">speeches</span><span class="tag" data-i18n="tGame">game</span></div></div></div>
+      <div class="time-block"><div class="tb-time">20:30</div><div class="tb-content"><div class="tb-title" data-i18n="d2t8">Live band</div><div class="tb-desc" data-i18n="d2d8">The moment everything ignites.</div><div class="tb-tags"><span class="tag" data-i18n="tLiveMusic">live music</span></div></div></div>
+      <div class="time-block"><div class="tb-time">21:30–00:30</div><div class="tb-content"><div class="tb-title" data-i18n="d2t9">First dance → Party 🎉</div><div class="tb-desc" data-i18n="d2d9">The couple opens the dance floor. DJ follows: tarantella, cumbia, techno, tango and whatever the night calls for.</div><div class="tb-tags"><span class="tag" data-i18n="tDancing">dancing</span><span class="tag">dj</span><span class="tag" data-i18n="tParty">party</span></div></div></div>
+      <div class="time-block"><div class="tb-time">00:30 →</div><div class="tb-content"><div class="tb-title" data-i18n="d2t10">After party</div><div class="tb-desc" data-i18n="d2d10">Board games, puzzle, soft music for those who want to wind down. The night is yours.</div></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="schedule-section" id="day3">
+    <div class="schedule-header" onclick="toggleDay('day3')">
+      <div class="schedule-header-left">
+        <div class="schedule-flag">🇸🇪</div>
+        <div>
+          <div class="schedule-title">Midsommar</div>
+          <div class="schedule-subtitle" data-i18n="d3subtitle">Thursday, June 19 · After-party · Intimate Farewell</div>
+        </div>
+      </div>
+      <div class="schedule-chevron">▼</div>
+    </div>
+    <div class="schedule-body">
+      <div class="dresscode-row">
+        <div class="dc-pill"><div class="dc-dot" style="background:#FECC02"></div><span data-i18n="d3dc">Dress code: bright and pastel colours — flower crowns very welcome</span></div>
+        <div class="dc-pill">🎶 <span data-i18n="d3music">Swedish folk · Nordic dances · Acoustic</span></div>
+        <div class="dc-pill">🍴 <span data-i18n="d3food">Swedish Midsommar buffet</span></div>
+      </div>
+      <div style="height:1.5rem;"></div>
+      <div class="time-block"><div class="tb-time">09:00–10:30</div><div class="tb-content"><div class="tb-title" data-i18n="d3t1">Breakfast / Brunch</div><div class="tb-desc" data-i18n="d3d1">Eggs, gravlax, dark bread, yogurt, jams, coffee. Total calm.</div><div class="tb-tags"><span class="tag">brunch</span><span class="tag">gravlax</span></div></div></div>
+      <div class="time-block"><div class="tb-time">10:30–12:00</div><div class="tb-content"><div class="tb-title" data-i18n="d3t2">Botanical walk + flower crown workshop</div><div class="tb-desc" data-i18n="d3d2">We head out to gather wildflowers and make our own crowns together in the garden.</div><div class="tb-tags"><span class="tag" data-i18n="tNature">nature</span><span class="tag" data-i18n="tFlowers">flowers</span><span class="tag" data-i18n="tWorkshop">workshop</span></div></div></div>
+      <div class="time-block"><div class="tb-time">12:00–13:30</div><div class="tb-content"><div class="tb-title" data-i18n="d3t3">Raising of the Midsommarstång 🌿</div><div class="tb-desc" data-i18n="d3d3">Swedish tradition at its finest. Dancing around the maypole — yes, including the frog dance. No one is exempt.</div><div class="tb-tags"><span class="tag" data-i18n="tTradition">tradition</span><span class="tag" data-i18n="tDancing">dancing</span><span class="tag">midsommar</span></div></div></div>
+      <div class="time-block"><div class="tb-time">13:30–15:30</div><div class="tb-content"><div class="tb-title" data-i18n="d3t4">Midsommar lunch</div><div class="tb-desc" data-i18n="d3d4">New potatoes, Swedish meatballs, rye bread, strawberries with cream, sandwich cake.</div><div class="tb-tags"><span class="tag" data-i18n="tLunch">lunch</span><span class="tag">swedish</span></div></div></div>
+      <div class="time-block"><div class="tb-time">15:30–17:00</div><div class="tb-content"><div class="tb-title" data-i18n="d3t5">Traditional games</div><div class="tb-desc" data-i18n="d3d5">Kubb, sack race, jump rope, frisbee, football, volleyball, Swedish bocce. Whatever the group invents.</div><div class="tb-tags"><span class="tag">kubb</span><span class="tag" data-i18n="tGames">games</span><span class="tag" data-i18n="tOutdoors">outdoors</span></div></div></div>
+      <div class="time-block"><div class="tb-time">17:00–18:30</div><div class="tb-content"><div class="tb-title" data-i18n="d3t6">Sauna + lake dip 🌊</div><div class="tb-desc" data-i18n="d3d6">The full Nordic experience. Sauna to lake and back — for the brave ones.</div><div class="tb-tags"><span class="tag">sauna</span><span class="tag" data-i18n="tLake">lake</span><span class="tag">nordic</span></div></div></div>
+      <div class="time-block"><div class="tb-time">19:00–20:00</div><div class="tb-content"><div class="tb-title" data-i18n="d3t7">Intimate closing 🥂</div><div class="tb-desc" data-i18n="d3d7">Final toast, words of gratitude from the couple, farewells. The most emotional moment of the weekend.</div><div class="tb-tags"><span class="tag" data-i18n="tFarewell">farewell</span><span class="tag" data-i18n="tToast">toast</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ARRIVE -->
+<section id="arrive" style="background:var(--ink);color:var(--cream);max-width:100%;padding:5rem 2rem;">
+  <div style="max-width:900px;margin:0 auto;">
+    <p class="section-label" data-i18n="arriveLabel">Getting to Osaby</p>
+    <h2 class="section-title fade-in" style="color:var(--cream);"><span data-i18n="arriveTitle1">How to</span><br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;" data-i18n="arriveTitle2">get there</em></h2>
+    <div class="divider"></div>
+    <div class="arrive-grid">
+      <div class="info-card" style="background:rgba(245,240,232,.04);border-color:rgba(245,240,232,.08);">
+        <div class="info-card-icon">🚂</div>
+        <h3 style="color:var(--cream);" data-i18n="fromCPH">From Copenhagen</h3>
+        <ul class="step-list">
+          <li><div class="step-num">1</div><span data-i18n="cph1">Train from <strong style="color:var(--cream);">København H</strong> to <strong style="color:var(--cream);">Växjö C Station</strong> — approx. 2h 20min via Öresundståg / SJ.</span></li>
+          <li><div class="step-num">2</div><span data-i18n="cph2">From Växjö: <strong style="color:var(--cream);">13 minutes by car</strong> to Osaby Säteri.</span></li>
+          <li><div class="step-num">3</div><span data-i18n="cph3">We can organise <strong style="color:var(--cream);">shared lifts</strong> from the station — or rent a car in Växjö (Europcar, Hertz available).</span></li>
+        </ul>
+      </div>
+      <div class="info-card" style="background:rgba(245,240,232,.04);border-color:rgba(245,240,232,.08);">
+        <div class="info-card-icon">✈️</div>
+        <h3 style="color:var(--cream);" data-i18n="fromITA">From Italy &amp; Argentina</h3>
+        <ul class="step-list">
+          <li><div class="step-num">1</div><span data-i18n="ita1"><strong style="color:var(--cream);">Fly</strong> to Copenhagen (CPH) or Malmö (MMX) — many connections from Rome, Milan and Buenos Aires.</span></li>
+          <li><div class="step-num">2</div><span data-i18n="ita2">From the airport, take the <strong style="color:var(--cream);">direct train to København H</strong> and follow the route above.</span></li>
+          <li><div class="step-num">3</div><span data-i18n="ita3">Alternatively: direct flight to <strong style="color:var(--cream);">Växjö Kronoberg Airport (VXO)</strong> if a connection is available.</span></li>
+        </ul>
+      </div>
+      <div class="info-card" style="background:rgba(245,240,232,.04);border-color:rgba(245,240,232,.08);grid-column:1/-1;">
+        <div class="info-card-icon">🚗</div>
+        <h3 style="color:var(--cream);" data-i18n="coordTitle">Coordinating arrivals</h3>
+        <p style="color:rgba(245,240,232,.5);" data-i18n="coordBody">We'll set up a group to coordinate train times and share car rides from Växjö. If you're arriving by train, let us know and we'll sort the transfer. If you prefer freedom, rent a car and enjoy the Swedish countryside on your own terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLEEP -->
+<section id="sleep">
+  <p class="section-label" data-i18n="sleepLabel">Accommodation</p>
+  <h2 class="section-title fade-in"><span data-i18n="sleepTitle1">Where to</span><br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;" data-i18n="sleepTitle2">sleep</em></h2>
+  <div class="divider"></div>
+  <p style="font-size:.85rem;font-weight:300;color:var(--muted);max-width:580px;line-height:1.8;" class="fade-in" data-i18n="sleepBody">
+    Options for every style — from a room at the venue to a tent or camper van. The important thing is that no one goes without a bed (unless they want to 🏕️).
+  </p>
+  <div class="sleep-options">
+    <div class="sleep-card"><div class="sleep-icon">🏰</div><h3>Osaby Säteri</h3><p data-i18n="sleep1">The venue itself. 26 beds available on the wedding grounds — waking up already there is priceless.</p><span class="sleep-badge" data-i18n="sleep1badge">26 beds</span></div>
+    <div class="sleep-card"><div class="sleep-icon">🌿</div><h3>Stjärnviks Säteri</h3><p data-i18n="sleep2">In Tävelsås, a few minutes away. 5 double rooms + 2 rooms with 120 cm beds for the inner circle.</p><span class="sleep-badge" data-i18n="sleep2badge">5 doubles + 2 singles</span></div>
+    <div class="sleep-card"><div class="sleep-icon">⛺</div><h3 data-i18n="sleep3title">Tent</h3><p data-i18n="sleep3">For the adventurous — sleeping under the Swedish June sky, where the light barely fades. Bring your tent and join in.</p><span class="sleep-badge" data-i18n="sleep3badge">nordic experience</span></div>
+    <div class="sleep-card"><div class="sleep-icon">🚐</div><h3>Van / Camper</h3><p data-i18n="sleep4">Rent a van and park on the grounds. The most free-spirited option — with the best view at breakfast.</p><span class="sleep-badge" data-i18n="sleep4badge">wild experience</span></div>
+  </div>
+</section>
+
+<!-- EXTRAS -->
+<section id="extras" style="background:var(--warm-white);max-width:100%;padding:5rem 2rem;">
+  <div style="max-width:900px;margin:0 auto;">
+    <p class="section-label" data-i18n="extrasLabel">The beautiful details</p>
+    <h2 class="section-title fade-in"><span data-i18n="extrasTitle1">The extras</span><br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;" data-i18n="extrasTitle2">that add magic</em></h2>
+    <div class="divider"></div>
+    <div class="extras-grid">
+      <div class="extra-item"><span>📸</span><strong data-i18n="ex1title">Collaborative photo album</strong><span data-i18n="ex1">Everyone's photos via QR — your shots in the shared album.</span></div>
+      <div class="extra-item"><span>🎵</span><strong data-i18n="ex2title">Shared playlist</strong><span data-i18n="ex2">Spotify with music from all three days. Add your own songs.</span></div>
+      <div class="extra-item"><span>📖</span><strong data-i18n="ex3title">Wishes book</strong><span data-i18n="ex3">On paper, for the messages that don't belong on a screen.</span></div>
+      <div class="extra-item"><span>🧩</span><strong data-i18n="ex4title">V&amp;A Jigsaw Puzzle</strong><span data-i18n="ex4">500 pieces with the couple's photo. Built together throughout the whole stay.</span></div>
+      <div class="extra-item"><span>🖍️</span><strong data-i18n="ex5title">Kids' corner</strong><span data-i18n="ex5">Drawing and play space for the little ones.</span></div>
+      <div class="extra-item"><span>🪞</span><strong data-i18n="ex6title">Memory corner</strong><span data-i18n="ex6">Photos of the couple and their families through the years.</span></div>
+      <div class="extra-item"><span>🏐</span><strong data-i18n="ex7title">Free sports</strong><span data-i18n="ex7">Frisbee, football, volleyball, Swedish bocce, lake swimming — always welcome.</span></div>
+      <div class="extra-item"><span>🎨</span><strong data-i18n="ex8title">Live tattoo</strong><span data-i18n="ex8">During Day 2's ceremony — a permanent memory of the day.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HONEYMOON FUND -->
+<div class="fund-section" id="fund">
+  <div class="fund-inner">
+    <div class="fund-left">
+      <p class="section-label" style="color:var(--gold);" data-i18n="fundLabel">Honeymoon Fund</p>
+      <h2 class="section-title" style="color:var(--cream);margin-bottom:0;"><span data-i18n="fundTitle1">A gift</span><br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;" data-i18n="fundTitle2">from the heart</em></h2>
+      <p class="fund-quote" data-i18n="fundQuote">"The greatest gift you can give us is sharing in our memories — if you'd like to contribute to our honeymoon adventure, we've left our bank details here."</p>
+      <p class="fund-sub" data-i18n="fundSub">Your presence is the best present. But if you'd like to add a little something to our next adventure together, we are deeply grateful.</p>
+    </div>
+    <div class="fund-right">
+      <div class="bank-card">
+        <div class="bank-card-header">
+          <div class="bank-card-header-icon">🌍</div>
+          <div class="bank-card-header-label" data-i18n="bankTitle">Bank Transfer Details</div>
+        </div>
+        <div class="bank-rows">
+          <div class="bank-row"><div class="bank-label" data-i18n="bankName">Account name</div><div class="bank-value" onclick="copyText('Victoria & Andrea')">Victoria &amp; Andrea <span class="copy-hint" data-i18n="copy">copy</span></div></div>
+          <div class="bank-row"><div class="bank-label" data-i18n="bankBank">Bank</div><div class="bank-value">— add your bank —</div></div>
+          <div class="bank-row"><div class="bank-label">IBAN</div><div class="bank-value" onclick="copyText('XX00 0000 0000 0000 0000')">XX00 0000 0000 0000 <span class="copy-hint" data-i18n="copy">copy</span></div></div>
+          <div class="bank-row"><div class="bank-label">BIC / SWIFT</div><div class="bank-value" onclick="copyText('XXXXXXXX')">XXXXXXXX <span class="copy-hint" data-i18n="copy">copy</span></div></div>
+          <div class="bank-row"><div class="bank-label" data-i18n="bankRef">Reference</div><div class="bank-value" onclick="copyText('Honeymoon V&A')">Honeymoon V&amp;A <span class="copy-hint" data-i18n="copy">copy</span></div></div>
+        </div>
+      </div>
+      <p class="fund-note" data-i18n="fundNote">Click any value to copy it to your clipboard. ✦ Thank you from the bottom of our hearts.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Victoria &amp; Andrea</strong>
+  <span data-i18n="footerLine">June 18, 2026 · Osaby Säteri, Sweden</span><br><br>
+  <span data-i18n="footerSub">With all the love in the world — and from Juan 🦋</span>
+</footer>
+
+<div class="copy-toast" id="toast">Copied!</div>
+
+<script>
+// ─── TRANSLATIONS ───────────────────────────────────────────────
+const T = {
+  en: {
+    heroDate:`June 17 · 18 · 19, 2026 · Osaby Säteri, Sweden`,
+    heroSub:`Three days, three worlds — Argentina · Italy · Sweden`,
+    scroll:`scroll`,
+    navJourney:`The Journey`, navSchedule:`Programme`, navArrive:`Getting There`,
+    navSleep:`Where to Sleep`, navExtras:`Extras`, navFund:`Honeymoon Fund`,
+    introLabel:`The Wedding`, introTitle1:`A weekend`, introTitle2:`to remember forever`,
+    introBody:`Victoria and Andrea — lovers of the art of gathering, travel, nature, music, sport and great food — are getting married surrounded by the people they love most, in a magical corner of Sweden. Three days, three identities, one love story.`,
+    programmeLabel:`The Programme`, programmeTitle1:`Three days,`, programmeTitle2:`three worlds`,
+    day1num:`Day 1 · June 17`, day1date:`Pre-party · Close friends`, day1desc:`A warm Argentine welcome. Parrilla, mate, bonfire and guitar under the Swedish stars.`,
+    day2num:`Day 2 · June 18`, day2date:`The Wedding · Main Celebration`, day2desc:`Mediterranean elegance. Outdoor ceremony by the lake, prosecco, pasta, tiramisù and dancing till dawn.`,
+    day3num:`Day 3 · June 19`, day3date:`After-party · Intimate farewell`, day3desc:`Flower crowns, midsommarstång, sauna by the lake and a farewell full of gratitude.`,
+    schedLabel:`Detailed Programme`, schedTitle1:`Every moment,`, schedTitle2:`planned with love`,
+    d1subtitle:`Tuesday, June 17 · Welcome · Close Friends`,
+    d1dc:`Dress code: relaxed and comfortable — your best self`,
+    d1food:`Argentine buffet, Danish style`,
+    d1t1:`Arrival at Osaby`, d1d1:`Check-in. In each room, a personal note from the couple waits for you — along with an alfajor or a typical Argentine or Italian sweet. A first hug from the newlyweds.`,
+    d1t2:`Welcome gathering`, d1d2:`Vermouth, fresh juices and fruit. Everyone together for the first time — soft music to break the ice and start the warmth.`,
+    d1t3:`Outdoor activity`, d1d3:`Walk around the property + photo hunt in 'Argentine character' mode. Photos shared at dinner via the collaborative album.`,
+    d1t4:`Argentine-style Fika`, d1d4:`Mate, chipá, medialunas, apple cake, pasta frola — outdoors. The 500-piece V&A jigsaw puzzle is officially launched: assembled together over the entire weekend.`,
+    d1t5:`Argentine buffet 🔥`, d1d5:`Full parrilla (vegan option included), empanadas, Russian salad, homemade bread, chimichurri, grilled onions. Malbec and white wine.`,
+    tDessert:`Dessert`, d1t6:`Grilled peaches`, d1d6:`With cream and dulce de leche, or homemade flan.`,
+    d1t7:`Bonfire with guitar`, d1d7:`Songs from here and there, games to get to know each other, laughter and connection. The fire as an excuse to come closer.`,
+    d1t8:`Sweet potato paste & cheese + digestifs`, d1d8:`The classic Argentine combo. Baileys optional for those who want to linger.`,
+    d1t9:`Free time — board games, puzzle`, d1d9:`Soft music. The goal is to be fresh for the big day. Stay up if you want — sleep if you should.`,
+    d2subtitle:`Wednesday, June 18 · The Wedding · Ceremony & Celebration`,
+    d2dc:`Dress code: summer formal — linen, white, soft tones`,
+    d2music:`Italian playlist · Live band · DJ`, d2food:`Italian buffet, Danish style`,
+    d2t1:`Breakfast buffet`, d2d1:`Focaccia, fruit, espresso, yogurt, granola, biscotti, Tuscan cookies, cheese, prosciutto — and any leftover medialunas from yesterday.`,
+    d2t2:`Free time`, d2d2:`Optional yoga, getting ready. The moment of hair, suits, nerves and emotion.`,
+    d2t3:`Witnesses gathering + rehearsal`, d2d3:`A symbolic rehearsal of the ceremony. Backstage photos.`,
+    d2t4:`✨ Symbolic ceremony`, d2d4:`Outdoors by the lake. The moment. Live tattoo artist as a permanent memory of this day — while guests begin with the aperitivos.`,
+    d2t5:`Prosecco toast`, d2d5:`Mediterranean aperitivos: bruschette, cheeses, olives, prosciutto. Tapas & finger food as prosecco flows.`,
+    d2t6:`Grand Italian dinner 🍝`, d2d6:`Pizza, antipasti, hot pasta: lasagna and gnocchi. Salads. Desserts: tiramisù, panna cotta and gelato.`,
+    duringDinner:`During dinner`, d2t7:`Speeches + Trivia`, d2d7:`Guest speeches + trivia game 'How well do you know them?' — questions about the couple to share laughs together.`,
+    d2t8:`Live band`, d2d8:`The moment everything ignites.`,
+    d2t9:`First dance → Party 🎉`, d2d9:`The couple opens the dance floor. DJ follows: tarantella, cumbia, techno, tango and whatever the night calls for.`,
+    d2t10:`After party`, d2d10:`Board games, puzzle, soft music for those who want to wind down. The night is yours.`,
+    d3subtitle:`Thursday, June 19 · After-party · Intimate Farewell`,
+    d3dc:`Dress code: bright and pastel colours — flower crowns very welcome`,
+    d3music:`Swedish folk · Nordic dances · Acoustic`, d3food:`Swedish Midsommar buffet`,
+    d3t1:`Breakfast / Brunch`, d3d1:`Eggs, gravlax, dark bread, yogurt, jams, coffee. Total calm.`,
+    d3t2:`Botanical walk + flower crown workshop`, d3d2:`We head out to gather wildflowers and make our own crowns together in the garden.`,
+    d3t3:`Raising of the Midsommarstång 🌿`, d3d3:`Swedish tradition at its finest. Dancing around the maypole — yes, including the frog dance. No one is exempt.`,
+    d3t4:`Midsommar lunch`, d3d4:`New potatoes, Swedish meatballs, rye bread, strawberries with cream, sandwich cake.`,
+    d3t5:`Traditional games`, d3d5:`Kubb, sack race, jump rope, frisbee, football, volleyball, Swedish bocce. Whatever the group invents.`,
+    d3t6:`Sauna + lake dip 🌊`, d3d6:`The full Nordic experience. Sauna to lake and back — for the brave ones.`,
+    d3t7:`Intimate closing 🥂`, d3d7:`Final toast, words of gratitude from the couple, farewells. The most emotional moment of the weekend.`,
+    arriveLabel:`Getting to Osaby`, arriveTitle1:`How to`, arriveTitle2:`get there`,
+    fromCPH:`From Copenhagen`,
+    cph1:`Train from <strong style='color:var(--cream)'>København H</strong> to <strong style='color:var(--cream)'>Växjö C Station</strong> — approx. 2h 20min via Öresundståg / SJ.`,
+    cph2:`From Växjö: <strong style='color:var(--cream)'>13 minutes by car</strong> to Osaby Säteri.`,
+    cph3:`We can organise <strong style='color:var(--cream)'>shared lifts</strong> from the station — or rent a car in Växjö (Europcar, Hertz available).`,
+    fromITA:`From Italy & Argentina`,
+    ita1:`<strong style='color:var(--cream)'>Fly</strong> to Copenhagen (CPH) or Malmö (MMX) — many connections from Rome, Milan and Buenos Aires.`,
+    ita2:`From the airport, take the <strong style='color:var(--cream)'>direct train to København H</strong> and follow the route above.`,
+    ita3:`Alternatively: direct flight to <strong style='color:var(--cream)'>Växjö Kronoberg Airport (VXO)</strong> if a connection is available.`,
+    coordTitle:`Coordinating arrivals`, coordBody:`We'll set up a group to coordinate train times and share car rides from Växjö. If you're arriving by train, let us know and we'll sort the transfer. If you prefer freedom, rent a car and enjoy the Swedish countryside on your own terms.`,
+    sleepLabel:`Accommodation`, sleepTitle1:`Where to`, sleepTitle2:`sleep`,
+    sleepBody:`Options for every style — from a room at the venue to a tent or camper van. The important thing is that no one goes without a bed (unless they want to 🏕️).`,
+    sleep1:`The venue itself. 26 beds available on the wedding grounds — waking up already there is priceless.`,
+    sleep1badge:`26 beds`,
+    sleep2:`In Tävelsås, a few minutes away. 5 double rooms + 2 rooms with 120 cm beds for the inner circle.`,
+    sleep2badge:`5 doubles + 2 singles`,
+    sleep3title:`Tent`, sleep3:`For the adventurous — sleeping under the Swedish June sky, where the light barely fades. Bring your tent and join in.`, sleep3badge:`nordic experience`,
+    sleep4:`Rent a van and park on the grounds. The most free-spirited option — with the best view at breakfast.`, sleep4badge:`wild experience`,
+    extrasLabel:`The beautiful details`, extrasTitle1:`The extras`, extrasTitle2:`that add magic`,
+    ex1title:`Collaborative photo album`, ex1:`Everyone's photos via QR — your shots in the shared album.`,
+    ex2title:`Shared playlist`, ex2:`Spotify with music from all three days. Add your own songs.`,
+    ex3title:`Wishes book`, ex3:`On paper, for the messages that don't belong on a screen.`,
+    ex4title:`V&A Jigsaw Puzzle`, ex4:`500 pieces with the couple's photo. Built together throughout the whole stay.`,
+    ex5title:`Kids' corner`, ex5:`Drawing and play space for the little ones.`,
+    ex6title:`Memory corner`, ex6:`Photos of the couple and their families through the years.`,
+    ex7title:`Free sports`, ex7:`Frisbee, football, volleyball, Swedish bocce, lake swimming — always welcome.`,
+    ex8title:`Live tattoo`, ex8:`During Day 2's ceremony — a permanent memory of the day.`,
+    fundLabel:`Honeymoon Fund`, fundTitle1:`A gift`, fundTitle2:`from the heart`,
+    fundQuote:`“The greatest gift you can give us is sharing in our memories — if you'd like to contribute to our honeymoon adventure, we've left our bank details here.”`,
+    fundSub:`Your presence is the best present. But if you'd like to add a little something to our next adventure together, we are deeply grateful.`,
+    bankTitle:`Bank Transfer Details`, bankName:`Account name`, bankBank:`Bank`, bankRef:`Reference`,
+    copy:`copy`, fundNote:`Click any value to copy it to your clipboard. ✦ Thank you from the bottom of our hearts.`,
+    footerLine:`June 18, 2026 · Osaby Säteri, Sweden`, footerSub:`With all the love in the world — and from Juan 🦋`,
+    tAccommodation:`accommodation`, tWelcome:`welcome`, tActivity:`activity`, tNature:`nature`,
+    tPhotos:`photos`, tOutdoors:`outdoors`, tDinner:`dinner`, tBreakfast:`breakfast`,
+    tCeremony:`ceremony`, tWitnesses:`witnesses`, tLakeside:`lakeside`, tTattoo:`live tattoo`,
+    tToast:`toast`, tSpeeches:`speeches`, tGame:`game`, tLiveMusic:`live music`,
+    tDancing:`dancing`, tParty:`party`, tFree:`free time`, tFlowers:`flowers`,
+    tWorkshop:`workshop`, tTradition:`tradition`, tLunch:`lunch`, tGames:`games`,
+    tLake:`lake`, tFarewell:`farewell`,
+  },
+  it: {
+    heroDate:`17 · 18 · 19 Giugno, 2026 · Osaby Säteri, Svezia`,
+    heroSub:`Tre giorni, tre mondi — Argentina · Italia · Svezia`,
+    scroll:`scorri`,
+    navJourney:`Il Viaggio`, navSchedule:`Programma`, navArrive:`Come Arrivare`,
+    navSleep:`Dove Dormire`, navExtras:`Extra`, navFund:`Fondo Viaggio di Nozze`,
+    introLabel:`Il Matrimonio`, introTitle1:`Un weekend`, introTitle2:`da ricordare per sempre`,
+    introBody:`Victoria e Andrea — amanti dell'arte di riunirsi, dei viaggi, della natura, della musica, dello sport e del buon cibo — si sposano circondati dalle persone che amano di più, in un angolo magico della Svezia. Tre giorni, tre identità, una storia d'amore.`,
+    programmeLabel:`Il Programma`, programmeTitle1:`Tre giorni,`, programmeTitle2:`tre mondi`,
+    day1num:`Giorno 1 · 17 Giugno`, day1date:`Pre-festa · Amici intimi`, day1desc:`Un caloroso benvenuto argentino. Parrilla, mate, falò e chitarra sotto le stelle svedesi.`,
+    day2num:`Giorno 2 · 18 Giugno`, day2date:`Il Matrimonio · Celebrazione principale`, day2desc:`Eleganza mediterranea. Cerimonia all'aperto sul lago, prosecco, pasta, tiramisù e ballo fino all'alba.`,
+    day3num:`Giorno 3 · 19 Giugno`, day3date:`After-party · Commiato intimo`, day3desc:`Corone di fiori, midsommarstång, sauna sul lago e un addio pieno di gratitudine.`,
+    schedLabel:`Programma dettagliato`, schedTitle1:`Ogni momento,`, schedTitle2:`pensato con amore`,
+    d1subtitle:`Martedì 17 Giugno · Benvenuto · Amici intimi`,
+    d1dc:`Dress code: rilassato e comodo — il tuo meglio`,
+    d1food:`Buffet argentino in stile danese`,
+    d1t1:`Arrivo a Osaby`, d1d1:`Check-in. In ogni camera vi aspetta un bigliettino personale degli sposi — con un alfajor o un dolce tipico argentino o italiano. Un primo abbraccio dagli sposi.`,
+    d1t2:`Ritrovo di benvenuto`, d1d2:`Vermut, succhi freschi e frutta. Tutti insieme per la prima volta — musica soft per rompere il ghiaccio.`,
+    d1t3:`Attività all'aperto`, d1d3:`Passeggiata nella tenuta + caccia fotografica in modalità 'personaggi argentini'. Foto condivise a cena tramite album collaborativo.`,
+    d1t4:`Fika in stile argentino`, d1d4:`Mate, chipá, medialunas, torta di mele, pasta frola — all'aperto. Lancio ufficiale del puzzle da 500 pezzi con la foto degli sposi: si assembla tutti insieme durante tutto il soggiorno.`,
+    d1t5:`Buffet argentino 🔥`, d1d5:`Parrilla completa (opzione vegana inclusa), empanadas, insalata russa, pane fatto in casa, chimichurri, cipolle alla griglia. Malbec e vino bianco.`,
+    tDessert:`Dolce`, d1t6:`Pesche grigliate`, d1d6:`Con panna e dulce de leche, o flan fatto in casa.`,
+    d1t7:`Falò con chitarra`, d1d7:`Canzoni di qua e di là, giochi per conoscersi, risate e connessione. Il fuoco come pretesto per avvicinarsi.`,
+    d1t8:`Pasta di patata dolce e formaggio + digestivi`, d1d8:`Il classico abbinamento argentino. Baileys opzionale per chi vuole prolungare.`,
+    d1t9:`Tempo libero — giochi da tavolo, puzzle`, d1d9:`Musica soft. L'obiettivo è essere freschi per il grande giorno. Restate svegli se volete — dormite se dovete.`,
+    d2subtitle:`Mercoledì 18 Giugno · Il Matrimonio · Cerimonia e Celebrazione`,
+    d2dc:`Dress code: formale estivo — lino, bianco, toni morbidi`,
+    d2music:`Playlist italiana · Banda dal vivo · DJ`, d2food:`Buffet italiano in stile danese`,
+    d2t1:`Buffet della colazione`, d2d1:`Focaccia, frutta, espresso, yogurt, granola, biscotti, cantucci, formaggi, prosciutto — e le eventuali medialunas avanzate ieri.`,
+    d2t2:`Tempo libero`, d2d2:`Yoga opzionale, preparativi. Il momento dell'acconciatura, dell'abito, dei nervi e dell'emozione.`,
+    d2t3:`Riunione dei testimoni + prova`, d2d3:`Una prova simbolica della cerimonia. Foto backstage.`,
+    d2t4:`✨ Cerimonia simbolica`, d2d4:`All'aperto sul lago. Il momento. Tatuatore dal vivo come ricordo permanente di questo giorno — mentre gli ospiti iniziano con gli aperitivi.`,
+    d2t5:`Brindisi con prosecco`, d2d5:`Aperitivi mediterranei: bruschette, formaggi, olive, prosciutto. Tapas & finger food mentre scorre il prosecco.`,
+    d2t6:`Grande cena italiana 🍝`, d2d6:`Pizza, antipasti, pasta calda: lasagna e gnocchi. Insalate. Dolci: tiramisù, panna cotta e gelato.`,
+    duringDinner:`Durante la cena`, d2t7:`Discorsi + Trivia`, d2d7:`Discorsi degli ospiti + gioco trivia 'Quanto li conosci?' — domande sugli sposi per ridere insieme.`,
+    d2t8:`Banda dal vivo`, d2d8:`Il momento in cui tutto si accende.`,
+    d2t9:`Primo ballo → Festa 🎉`, d2d9:`Gli sposi aprono la pista. Segue il DJ: tarantella, cumbia, techno, tango e tutto ciò che la notte richiede.`,
+    d2t10:`After party`, d2d10:`Giochi da tavolo, puzzle, musica soft per chi vuole rilassarsi. La notte è vostra.`,
+    d3subtitle:`Giovedì 19 Giugno · After-party · Commiato intimo`,
+    d3dc:`Dress code: colori vivaci e pastello — corone di fiori benvenute`,
+    d3music:`Folk svedese · Danze nordiche · Acustica`, d3food:`Buffet Midsommar svedese`,
+    d3t1:`Colazione / Brunch`, d3d1:`Uova, gravlax, pane scuro, yogurt, marmellate, caffè. Totale calma.`,
+    d3t2:`Passeggiata botanica + laboratorio di corone floreali`, d3d2:`Usciamo a raccogliere fiori selvatici e realizziamo le nostre corone insieme in giardino.`,
+    d3t3:`Alzata del Midsommarstång 🌿`, d3d3:`La tradizione svedese nella sua massima espressione. Danze intorno al palo di maggio — sì, inclusa la danza delle rane. Nessuno è esente.`,
+    d3t4:`Pranzo Midsommar`, d3d4:`Patate novelle, polpette svedesi, pane di segale, fragole con panna, torta sandwich.`,
+    d3t5:`Giochi tradizionali`, d3d5:`Kubb, corsa nei sacchi, salto con la corda, frisbee, calcio, pallavolo, bocce svedesi. Tutto ciò che il gruppo inventa.`,
+    d3t6:`Sauna + tuffo nel lago 🌊`, d3d6:`L'esperienza nordica completa. Sauna, lago e ritorno — per i coraggiosi.`,
+    d3t7:`Chiusura intima 🥂`, d3d7:`Brindisi finale, parole di gratitudine degli sposi, saluti. Il momento più emozionante del weekend.`,
+    arriveLabel:`Come arrivare a Osaby`, arriveTitle1:`Come`, arriveTitle2:`arrivare`,
+    fromCPH:`Da Copenaghen`,
+    cph1:`Treno da <strong style='color:var(--cream)'>København H</strong> a <strong style='color:var(--cream)'>Växjö C Station</strong> — circa 2h 20min con Öresundståg / SJ.`,
+    cph2:`Da Växjö: <strong style='color:var(--cream)'>13 minuti in auto</strong> fino a Osaby Säteri.`,
+    cph3:`Possiamo organizzare <strong style='color:var(--cream)'>passaggi condivisi</strong> dalla stazione — o noleggiare un'auto a Växjö (Europcar, Hertz disponibili).`,
+    fromITA:`Da Italia e Argentina`,
+    ita1:`<strong style='color:var(--cream)'>Volo</strong> per Copenaghen (CPH) o Malmö (MMX) — molti collegamenti da Roma, Milano e Buenos Aires.`,
+    ita2:`Dall'aeroporto, prendere il <strong style='color:var(--cream)'>treno diretto per København H</strong> e seguire il percorso sopra.`,
+    ita3:`In alternativa: volo diretto per <strong style='color:var(--cream)'>Växjö Kronoberg Airport (VXO)</strong> se disponibile.`,
+    coordTitle:`Coordinare gli arrivi`, coordBody:`Creeremo un gruppo per coordinare gli orari dei treni e condividere i viaggi in auto da Växjö. Se arrivate in treno, fatemelo sapere e organizziamo il trasferimento. Se preferite libertà, noleggiate un'auto e godetevi la campagna svedese.`,
+    sleepLabel:`Alloggio`, sleepTitle1:`Dove`, sleepTitle2:`dormire`,
+    sleepBody:`Opzioni per ogni stile — da una camera in loco a una tenda o camper. L'importante è che nessuno rimanga senza letto (a meno che non lo voglia 🏕️).`,
+    sleep1:`Il luogo stesso. 26 posti letto disponibili nella tenuta — svegliarsi già lì non ha prezzo.`, sleep1badge:`26 posti letto`,
+    sleep2:`A Tävelsås, a pochi minuti. 5 camere doppie + 2 camere con letti da 120 cm per il cerchio più intimo.`, sleep2badge:`5 doppie + 2 singole`,
+    sleep3title:`Tenda`, sleep3:`Per i più avventurosi — dormire sotto il cielo svedese di giugno, dove la luce quasi non tramonta. Porta la tua tenda.`, sleep3badge:`esperienza nordica`,
+    sleep4:`Noleggia un van e parcheggia nella tenuta. L'opzione più libera — con la vista migliore a colazione.`, sleep4badge:`wild experience`,
+    extrasLabel:`I dettagli più belli`, extrasTitle1:`Gli extra`, extrasTitle2:`che aggiungono magia`,
+    ex1title:`Album fotografico collaborativo`, ex1:`Le foto di tutti tramite QR — i tuoi scatti nell'album condiviso.`,
+    ex2title:`Playlist condivisa`, ex2:`Spotify con la musica dei tre giorni. Aggiungi le tue canzoni.`,
+    ex3title:`Libro dei desideri`, ex3:`Su carta, per i messaggi che non appartengono a uno schermo.`,
+    ex4title:`Puzzle V&A`, ex4:`500 pezzi con la foto degli sposi. Assemblato insieme durante tutto il soggiorno.`,
+    ex5title:`Angolo bambini`, ex5:`Spazio di disegno e gioco per i più piccoli.`,
+    ex6title:`Angolo dei ricordi`, ex6:`Foto degli sposi e delle loro famiglie nel corso degli anni.`,
+    ex7title:`Sport liberi`, ex7:`Frisbee, calcio, pallavolo, bocce svedesi, bagno nel lago — sempre benvenuti.`,
+    ex8title:`Tatuaggio dal vivo`, ex8:`Durante la cerimonia del Giorno 2 — un ricordo permanente del giorno.`,
+    fundLabel:`Fondo Viaggio di Nozze`, fundTitle1:`Un dono`, fundTitle2:`dal cuore`,
+    fundQuote:`“Il regalo più grande che potete farci è condividere i nostri ricordi — se volete contribuire alla nostra avventura di luna di miele, abbiamo lasciato qui i nostri dati bancari.”`,
+    fundSub:`La vostra presenza è il regalo più bello. Ma se volete aggiungere un piccolo contributo alla nostra prossima avventura insieme, siamo profondamente grati.`,
+    bankTitle:`Dati per Bonifico Bancario`, bankName:`Intestatario`, bankBank:`Banca`, bankRef:`Causale`,
+    copy:`copia`, fundNote:`Clicca su qualsiasi valore per copiarlo. ✦ Grazie di cuore.`,
+    footerLine:`18 Giugno, 2026 · Osaby Säteri, Svezia`, footerSub:`Con tutto l'amore del mondo — e da Juan 🦋`,
+    tAccommodation:`alloggio`, tWelcome:`benvenuto`, tActivity:`attività`, tNature:`natura`,
+    tPhotos:`foto`, tOutdoors:`all'aperto`, tDinner:`cena`, tBreakfast:`colazione`,
+    tCeremony:`cerimonia`, tWitnesses:`testimoni`, tLakeside:`sul lago`, tTattoo:`tatuaggio dal vivo`,
+    tToast:`brindisi`, tSpeeches:`discorsi`, tGame:`gioco`, tLiveMusic:`musica dal vivo`,
+    tDancing:`ballo`, tParty:`festa`, tFree:`tempo libero`, tFlowers:`fiori`,
+    tWorkshop:`laboratorio`, tTradition:`tradizione`, tLunch:`pranzo`, tGames:`giochi`,
+    tLake:`lago`, tFarewell:`commiato`,
+  },
+  es: {
+    heroDate:`17 · 18 · 19 de Junio, 2026 · Osaby Säteri, Suecia`,
+    heroSub:`Tres días, tres mundos — Argentina · Italia · Suecia`,
+    scroll:`bajar`,
+    navJourney:`El Viaje`, navSchedule:`Programa`, navArrive:`Cómo Llegar`,
+    navSleep:`Dónde Dormir`, navExtras:`Extras`, navFund:`Fondo de Luna de Miel`,
+    introLabel:`La Boda`, introTitle1:`Un fin de semana`, introTitle2:`para no olvidar`,
+    introBody:`Victoria y Andrea — amantes del arte de reunirse, los viajes, la naturaleza, la música, el deporte y la buena comida — se casan rodeados de las personas que más quieren, en un rincón mágico de Suecia. Tres días, tres identidades, una sola historia de amor.`,
+    programmeLabel:`El Programa`, programmeTitle1:`Tres días,`, programmeTitle2:`tres mundos`,
+    day1num:`Día 1 · 17 de Junio`, day1date:`Pre-fiesta · Amigos íntimos`, day1desc:`Una cálida bienvenida argentina. Parrilla, mate, fogón y guitarra bajo las estrellas suecas.`,
+    day2num:`Día 2 · 18 de Junio`, day2date:`La Boda · Celebración principal`, day2desc:`Elegancia mediterránea. Ceremonia al aire libre frente al lago, prosecco, pasta, tiramisú y baile hasta el amanecer.`,
+    day3num:`Día 3 · 19 de Junio`, day3date:`After-party · Despedida íntima`, day3desc:`Coronas florales, midsommarstång, sauna junto al lago y una despedida llena de gratitud.`,
+    schedLabel:`Programa detallado`, schedTitle1:`Cada momento,`, schedTitle2:`pensado con amor`,
+    d1subtitle:`Martes 17 de Junio · Bienvenida · Amigos íntimos`,
+    d1dc:`Dress code: relajado y cómodo — tu mejor versión`,
+    d1food:`Buffet argentino al estilo danés`,
+    d1t1:`Llegada a Osaby`, d1d1:`Check-in. En cada habitación les espera una cartita personal de los novios — con un alfajorcito o golosina típica argentina o italiana. Un primer abrazo de los novios.`,
+    d1t2:`Reunión de bienvenida`, d1d2:`Vermú, jugos frescos y fruta. Todos juntos por primera vez — música suave para romper el hielo.`,
+    d1t3:`Actividad recreativa`, d1d3:`Caminata por la propiedad + cacería de fotos en modo 'personajes argentinos'. Fotos compartidas en la cena vía álbum colaborativo.`,
+    d1t4:`Fika al estilo argentino`, d1d4:`Mate, chipá, medialunas, torta de manzana, pastaflora — al aire libre. Lanzamiento oficial del rompecabezas de 500 piezas con la foto de los novios: se arma entre todos durante toda la estadía.`,
+    d1t5:`Buffet argentino 🔥`, d1d5:`Parrillada completa (opción vegana incluida), empanadas, ensalada rusa, pan casero, chimichurri, cebollas a la plancha. Malbec y vino blanco.`,
+    tDessert:`Postres`, d1t6:`Duraznos a la plancha`, d1d6:`Con crema y dulce de leche, o flan casero.`,
+    d1t7:`Fogón con guitarra`, d1d7:`Canciones de aquí y allá, dinámicas para conocerse, reír y conectar. El fuego como excusa para acercarse.`,
+    d1t8:`Dulce de batata y queso + digestivos`, d1d8:`El clásico argentino. Baileys opcional para los que quieran alargar.`,
+    d1t9:`Tiempo libre — juegos de mesa, rompecabezas`, d1d9:`Música suave. La idea es estar pilas para el día grande. Quedarse si quieren — dormir si deben.`,
+    d2subtitle:`Miércoles 18 de Junio · La Boda · Ceremonia y Celebración`,
+    d2dc:`Dress code: formal veraniego — lino, blanco, tonos suaves`,
+    d2music:`Playlist italiana · Banda en vivo · DJ`, d2food:`Buffet italiano al estilo danés`,
+    d2t1:`Buffet de desayuno`, d2d1:`Focaccias, frutas, espresso, yogur, granola, biscotti, galletas de la Toscana, queso, jamón — y si quedan medialunas de ayer, mejor.`,
+    d2t2:`Tiempo libre`, d2d2:`Yoga opcional, preparación de los novios e invitados. El momento del peinado, el traje, los nervios y la emoción.`,
+    d2t3:`Reunión de testigos + ensayo`, d2d3:`Un ensayo simbólico de la ceremonia. Fotitos del backstage.`,
+    d2t4:`✨ Ceremonia simbólica`, d2d4:`Al aire libre frente al lago. El momento. Tatuador en vivo como recuerdo permanente de este día — mientras los invitados arrancan con los aperitivos.`,
+    d2t5:`Brindis con prosecco`, d2d5:`Aperitivos mediterráneos: bruschette, quesos, olivas, prosciutto. Tapas & finger food mientras corre el prosecco.`,
+    d2t6:`Gran cena italiana 🍝`, d2d6:`Pizza, antipasti, pasta caliente: lasagna y ñoquis. Ensaladas. Postres: tiramisú, panna cotta y ¿gelato?`,
+    duringDinner:`Durante la cena`, d2t7:`Discursos + Trivia`, d2d7:`Speeches de invitados + juego de trivia '¿cuánto los conocés?' — preguntas sobre los novios para reírse juntos.`,
+    d2t8:`Banda en vivo`, d2d8:`El momento en que todo se enciende.`,
+    d2t9:`Baile de los novios → Fiesta 🎉`, d2d9:`Los novios abren la pista. Sigue el DJ: tarantela, cumbia, techno, tango y lo que pida la noche.`,
+    d2t10:`After party`, d2d10:`Juegos de mesa, rompecabezas, música suave para quienes quieran bajar un cambio. La noche es de ustedes.`,
+    d3subtitle:`Jueves 19 de Junio · After-party · Despedida íntima`,
+    d3dc:`Dress code: colores vivos y pasteles — coronas florales muy bienvenidas`,
+    d3music:`Folk sueco · Danzas nórdicas · Acústica`, d3food:`Buffet Midsommar sueco`,
+    d3t1:`Desayuno / Brunch`, d3d1:`Huevos, gravlax, pan negro, yogur, mermeladas, café. Calma total.`,
+    d3t2:`Paseo botánico + taller de coronas florales`, d3d2:`Salimos a recolectar flores silvestres y armamos nuestras propias coronas juntos en el jardín.`,
+    d3t3:`Levantamiento del Midsommarstång 🌿`, d3d3:`La tradición sueca en su máxima expresión. Danzas alrededor del palo de mayo — sí, incluyendo la danza de las ranitas. Nadie se salva.`,
+    d3t4:`Almuerzo Midsommar`, d3d4:`Papas nuevas, albóndigas suecas, pan de centeno, frutillas con crema, torta sanguche.`,
+    d3t5:`Juegos tradicionales`, d3d5:`Kubb, carrera de sacos, saltar la soga, frisbee, fútbol, vóley, bochas suecas. Todo lo que invente el grupo.`,
+    d3t6:`Sauna + chapuzón en el lago 🌊`, d3d6:`La experiencia nórdica completa. Del sauna al lago y viceversa — para los valientes.`,
+    d3t7:`Cierre íntimo 🥂`, d3d7:`Brindis final, palabras de agradecimiento de los novios, despedidas. El momento más emotivo del fin de semana.`,
+    arriveLabel:`Llegar a Osaby`, arriveTitle1:`Cómo`, arriveTitle2:`llegar`,
+    fromCPH:`Desde Copenhague`,
+    cph1:`Tren desde <strong style='color:var(--cream)'>København H</strong> hasta <strong style='color:var(--cream)'>Växjö C Station</strong> — aprox. 2h 20min con Öresundståg / SJ.`,
+    cph2:`Desde Växjö: <strong style='color:var(--cream)'>13 minutos en auto</strong> hasta Osaby Säteri.`,
+    cph3:`Podemos organizar <strong style='color:var(--cream)'>viajes compartidos</strong> desde la estación — o alquilar auto en Växjö (Europcar, Hertz disponibles).`,
+    fromITA:`Desde Italia y Argentina`,
+    ita1:`<strong style='color:var(--cream)'>Vuelo</strong> a Copenhague (CPH) o Malmö (MMX) — muchas conexiones desde Roma, Milán y Buenos Aires.`,
+    ita2:`Desde el aeropuerto, tomar el <strong style='color:var(--cream)'>tren directo a København H</strong> y seguir la ruta de arriba.`,
+    ita3:`Alternativamente: vuelo directo a <strong style='color:var(--cream)'>Växjö Kronoberg Airport (VXO)</strong> si hay conexión disponible.`,
+    coordTitle:`Coordinar llegadas`, coordBody:`Vamos a armar un grupo para coordinar horarios de trenes y compartir autos desde Växjö. Si llegás en tren, avisanos y organizamos el transfer. Si preferís ir más libre, alquilá un auto y disfrutá del paisaje sueco.`,
+    sleepLabel:`Alojamiento`, sleepTitle1:`Dónde`, sleepTitle2:`dormir`,
+    sleepBody:`Opciones para todos los estilos — desde habitación en el lugar hasta carpa o van. Lo importante es que nadie se quede sin cama (a menos que quiera 🏕️).`,
+    sleep1:`El lugar mismo. 26 camas disponibles en el predio de la boda — despertarte ya estando ahí no tiene precio.`, sleep1badge:`26 camas`,
+    sleep2:`En Tävelsås, a pocos minutos. 5 habitaciones dobles + 2 habitaciones con camas de 120 cm para el círculo íntimo.`, sleep2badge:`5 dobles + 2 simples`,
+    sleep3title:`Carpa`, sleep3:`Para los más aventureros — dormir bajo el cielo sueco de junio, donde la luz casi no se apaga. Traé tu carpa y súmate.`, sleep3badge:`experiencia nórdica`,
+    sleep4:`Alquilá una van y estacioná en el predio. La opción más libre — con el mejor desayuno con vista al lago.`, sleep4badge:`experiencia salvaje`,
+    extrasLabel:`Los detalles bonitos`, extrasTitle1:`Los extras`, extrasTitle2:`que suman magia`,
+    ex1title:`Álbum colaborativo de fotos`, ex1:`Las fotos de todos vía QR — las tuyas en el álbum compartido.`,
+    ex2title:`Playlist compartida`, ex2:`Spotify con la música de los tres días. Podés sumar canciones.`,
+    ex3title:`Libro de deseos`, ex3:`En papel, para los mensajes que no se escriben en pantalla.`,
+    ex4title:`Rompecabezas V&A`, ex4:`500 piezas con la foto de los novios. Se arma entre todos durante toda la estadía.`,
+    ex5title:`Rincón para niños`, ex5:`Espacio de dibujo y juego para los más chicos.`,
+    ex6title:`Rincón de la memoria`, ex6:`Fotos de los novios y sus familias a lo largo de los años.`,
+    ex7title:`Deportes libres`, ex7:`Frisbee, fútbol, vóley, bochas, meterse al lago — siempre bienvenido.`,
+    ex8title:`Tatuaje en vivo`, ex8:`Durante la ceremonia del Día 2 — un recuerdo permanente del día.`,
+    fundLabel:`Fondo de Luna de Miel`, fundTitle1:`Un regalo`, fundTitle2:`del corazón`,
+    fundQuote:`“El regalo más grande que nos podés dar es compartir nuestros recuerdos — si querés contribuir a nuestra aventura de luna de miel, te dejamos los datos bancarios acá.”`,
+    fundSub:`Tu presencia es el mejor regalo. Pero si querés agregar algo a nuestra próxima aventura juntos, estamos profundamente agradecidos.`,
+    bankTitle:`Datos para Transferencia Bancaria`, bankName:`Titular de cuenta`, bankBank:`Banco`, bankRef:`Referencia`,
+    copy:`copiar`, fundNote:`Hacé clic en cualquier valor para copiarlo. ✦ Gracias de todo corazón.`,
+    footerLine:`18 de Junio, 2026 · Osaby Säteri, Suecia`, footerSub:`Con todo el amor del mundo — y de Juan 🦋`,
+    tAccommodation:`alojamiento`, tWelcome:`bienvenida`, tActivity:`actividad`, tNature:`naturaleza`,
+    tPhotos:`fotos`, tOutdoors:`aire libre`, tDinner:`cena`, tBreakfast:`desayuno`,
+    tCeremony:`ceremonia`, tWitnesses:`testigos`, tLakeside:`frente al lago`, tTattoo:`tatuaje en vivo`,
+    tToast:`brindis`, tSpeeches:`discursos`, tGame:`juego`, tLiveMusic:`música en vivo`,
+    tDancing:`baile`, tParty:`fiesta`, tFree:`tiempo libre`, tFlowers:`flores`,
+    tWorkshop:`taller`, tTradition:`tradición`, tLunch:`almuerzo`, tGames:`juegos`,
+    tLake:`lago`, tFarewell:`despedida`,
+  }
+};
+
+// ─── LANG SWITCH ────────────────────────────────────────────────
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) {
+      el.innerHTML = t[key];
+    }
+  });
+
+  // Update active button state (both nav and mobile)
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+
+  // Update html lang
+  document.documentElement.lang = lang;
+
+  // Update copy toast text
+  document.getElementById('toast').textContent = lang === 'it' ? 'Copiato!' : lang === 'es' ? '¡Copiado!' : 'Copied!';
+}
+
+// ─── NAV / MENU ──────────────────────────────────────────────────
+function openMenu() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow=''; }
+
+// ─── SCHEDULE ───────────────────────────────────────────────────
+function toggleDay(id) { document.getElementById(id).classList.toggle('open'); }
+function openDay(id) {
+  document.getElementById(id).classList.add('open');
+  setTimeout(() => document.getElementById('schedule').scrollIntoView({behavior:'smooth'}), 100);
+}
+
+// ─── COPY TO CLIPBOARD ──────────────────────────────────────────
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  });
+}
+
+// ─── FADE IN ─────────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
